@@ -1,0 +1,49 @@
+<!doctype html>
+<html lang="en">
+    <head>
+        <!-- Required meta tags -->
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+        <!-- Icons and formats for 'save to home screen'-->
+        <link rel="apple-touch-icon" sizes="180x180" href="/static/apple-touch-icon.png">
+        <link rel="icon" type="image/png" sizes="32x32" href="/static/favicon-32x32.png">
+        <link rel="icon" type="image/png" sizes="16x16" href="/static/favicon-16x16.png">
+        <link rel="manifest" href="/static/site.webmanifest">
+        <link rel="mask-icon" href="/static/safari-pinned-tab.svg" color="#000000">
+        <link rel="shortcut icon" href="/static/favicon.ico">
+        <meta name="apple-mobile-web-app-title" content="Cycling Challenge">
+        <meta name="application-name" content="Cycling Challenge">
+        <meta name="msapplication-TileColor" content="#2b5797">
+        <meta name="theme-color" content="#ffffff">
+        
+        <!-- Bootstrap CSS -->
+        <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css" integrity="sha384-9aIt2nRpC12Uk9gS9baDl411NQApFmC26EwAOH8WgZl5MYYxFfc+NcPb1dKGj7Sk" crossorigin="anonymous"> 
+        <link rel="stylesheet" href={{ url_for('static', filename='navbar.css') }} >
+        <link rel="stylesheet" href={{ url_for('static', filename='style.css') }} >
+        {% if stylesheet=='signin' %}
+            <link href="{{ url_for('static', filename='signin.css')}}" rel="stylesheet">
+        {% endif %}
+            
+        <title>{% if title %}{{ title }} | Cycling Challenge{% else %}Welcome to the Cycling Challenge{% endif %}</title>
+        </head>
+        <body>
+        {% include 'sub/_nav.html' %}
+        <div class="container">
+            <main role="main">
+                <div class="container ">
+                    {% include 'sub/_alert.html' %}
+        
+                    {% block content %}
+                    {% endblock %}
+                </div>
+            </main>
+        </div>
+        
+        <!-- Optional JavaScript -->
+        <!-- jQuery first, then Popper.js, then Bootstrap JS -->
+        <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
+        <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
+        <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.min.js" integrity="sha384-OgVRvuATP1z7JjHLkuOU7Xw704+h835Lr+6QL9UvYjZE3Ipu6Tp75j7Bh/kR0JKI" crossorigin="anonymous"></script>
+    </body>
+</html>
