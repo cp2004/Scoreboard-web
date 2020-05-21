@@ -1,5 +1,5 @@
 <nav class="navbar navbar-expand-md navbar-dark bg-dark">
-    <a class="navbar-brand" href="{{ url_for('main.index') }}">Cycling Challenge</a>
+    <a class="navbar-brand" href="{{ url_for('main.index') }}">Table Tennis Scoreboard</a>
     <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarsExample04" aria-controls="navbarsExample04" aria-expanded="false" aria-label="Toggle navigation">
       <span class="navbar-toggler-icon"></span>
     </button>
@@ -14,14 +14,11 @@
           <a class="nav-link" href="{{ url_for('auth.login') }}">Login</a>
         </li>
         {% else %}
-        <li {% if request.path == url_for('main.user', username=current_user.username) %} class="nav-item active" {% else %} class="nav-item" {% endif %}>
-          <a class="nav-link" href="{{ url_for('main.user', username=current_user.username) }}">Profile</a>
-        </li>
         <li {% if request.path == url_for('auth.logout') %} class="nav-item active" {% else %} class="nav-item" {% endif %}>
             <a class="nav-link" href="{{ url_for('auth.logout') }}">Logout</a>
         </li>
-        <li {% if request.path == url_for('dash.home') %} class="nav-item active" {% else %} class="nav-item" {% endif %}>
-          <a class="nav-link" href="{{ url_for('dash.home') }}">Dashboard</a>
+        <li {% if request.path == url_for('control.new_game') %} class="nav-item active" {% else %} class="nav-item" {% endif %}>
+          <a class="nav-link" href="{{ url_for('control.new_game') }}">New Game</a>
         </li>
         {% endif %}
       </ul>
