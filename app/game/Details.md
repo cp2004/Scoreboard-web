@@ -1,0 +1,1 @@
+Folder for the game session code, such as calling scores, serves etc.
