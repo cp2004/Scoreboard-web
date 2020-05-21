@@ -7,4 +7,7 @@ from flask_login import current_user, login_required, login_user, logout_user
 @bp.route('/index')
 @login_required
 def index():
-    return "Hello world"
+    try:
+        return render_template('main/index.html', title="home")
+    except:
+        return "Game server unwell"
