@@ -7,11 +7,14 @@ from flask_migrate import Migrate
 from flask_login import LoginManager
 from config import Config
 
+from app.game.session_manager import Session_Manager
+
 db = SQLAlchemy()
 migrate = Migrate()
 login = LoginManager()
 login.login_view = 'auth.login'
 login.login_message = 'Please log in to access this page'
+session = Session_Manager()
 
 def create_app(config_class=Config):
     app = Flask(__name__)
@@ -26,6 +29,12 @@ def create_app(config_class=Config):
 
     from app.auth import bp as auth_bp
     app.register_blueprint(auth_bp)
+
+    from app.control import bp as control_bp
+    app.register_blueprint(control_bp)
+
+
+
 
     return app
 
