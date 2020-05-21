@@ -1,0 +1,43 @@
+<script>
+    setInterval(function(){ getScore(); }, 1000);
+
+    function Score(player) {
+        var url = "/game/data/score"
+        if (player == 1){ var content = {'command':'p1'}}
+        else if (player == 2){ var content = {'command':'p2'}}
+        postAjax(url, content, updateScore)
+    }
+
+    function getScore() {
+        var url = "/game/data/score?t=" + Math.random();
+        getAjax(url, updateScore);
+    }
+    function updateScore(xhttp) {
+        document.getElementById("score").innerHTML = xhttp.responseText;
+    }
+
+
+    function getAjax(url, cFunction) {
+        var xhttp;
+        xhttp = new XMLHttpRequest();
+        xhttp.onreadystatechange = function() {
+            if (this.readyState == 4 && this.status ==200) {
+                cFunction(this);
+            }
+        };
+        xhttp.open("GET", url, true);
+        xhttp.send();
+    }
+    function postAjax(url, content, cFunction) {
+        var xhttp;
+        xhttp = new XMLHttpRequest();
+        xhttp.onreadystatechange = function() {
+            if (this.readyState == 4 && this.status == 200) {
+                cFunction(this)
+            }
+        };
+        xhttp.open("POST", url, true)
+        xhttp.setRequestHeader("Content-Type", "application/json;charset=UTF-8");
+        xhttp.send(JSON.stringify(content));
+    }
+</script>

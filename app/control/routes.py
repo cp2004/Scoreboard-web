@@ -28,8 +28,21 @@ def game(gameid):
     currentId = session.getSessionId()
     if int(gameid) != currentId:
         return redirect(url_for('main.index'))
-    return "Game in progress: {}".format(gameid)
+    return render_template('control/game.html', title="Game in Progress")
 
-@bp.route('/game/backend/<sessionid>')
-def backend(sessionid):
-    return "Backend not functioning...."
+@bp.route('/game/data/score', methods=['GET', 'POST'])
+def backend():
+    game = session.getSession()
+    if request.method == 'GET':
+        player1_score = game.getScore(game.player1)
+        player2_score = game.getScore(game.player2)
+        return "{} - {}".format(player1_score, player2_score)
+    elif request.method == 'POST':
+        data = request.json
+        if data['command'] == 'p1':
+            game.Score(game.player1)
+        elif data['command'] == 'p2':
+            game.Score(game.player2)
+        player1_score = game.getScore(game.player1)
+        player2_score = game.getScore(game.player2)
+        return "{} - {}".format(player1_score, player2_score)

@@ -7,6 +7,9 @@ class Game():
         self.serving = firstServer
         self.pointsServed = 0
         self.winner = None
+    
+    def getScore(self, Player):
+        return Player.score
 
     def Score(self, Player):
         #called on every score, arg for player
