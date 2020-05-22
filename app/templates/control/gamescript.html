@@ -1,19 +1,19 @@
 <script>
-    setInterval(function(){ getScore(); }, 1000);
+    document.addEventListener("DOMContentLoaded", getScore())
 
     function Score(player) {
-        var url = "/game/data/score"
+        var url = "/game/data/scoreboard"
         if (player == 1){ var content = {'command':'p1'}}
         else if (player == 2){ var content = {'command':'p2'}}
         postAjax(url, content, updateScore)
     }
 
     function getScore() {
-        var url = "/game/data/score?t=" + Math.random();
+        var url = "/game/data/scoreboard?t=" + Math.random();
         getAjax(url, updateScore);
     }
     function updateScore(xhttp) {
-        document.getElementById("score").innerHTML = xhttp.responseText;
+        document.getElementById("scoreboard").innerHTML = xhttp.responseText;
     }
 
 

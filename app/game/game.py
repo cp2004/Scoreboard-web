@@ -58,6 +58,12 @@ class Game():
         Player.wins += 1
         self.winner = Player
 
+    def getServe(self):
+        if self.serving == self.player1:
+            return 1
+        else:
+            return 2
+
     def setServe(self, Player):
         if self.serving == None:
             Player.ServingFirst = True

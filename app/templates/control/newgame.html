@@ -13,13 +13,17 @@
             <label for="player2">Player 2:</label>
             {{ form.player2(class_="form-control") }}
         </div>
-<!--
         <div class="form-group">
-            {{ form.player1(class_="form-control") }}
+            <label for="serving">Select first serve: </label>
+            <div class="custom-control custom-radio custom-control-inline">
+                <input class="custom-control-input" id="serving-0" name="serving" type="radio" value="p1">
+                <label class="custom-control-label" for="serving-0">Player 1</label>
+            </div>
+            <div class="custom-control custom-radio custom-control-inline">
+                <input class="custom-control-input" id="serving-1" name="serving" type="radio" value="p2">
+                <label class="custom-control-label" for="serving-1">Player 2</label>
+            </div>
         </div>
-        <div class="form-group">
-            {{ form.player2(class_="form-control") }}
-        </div> -->
         <br>
         {{ form.submit(class_="btn btn-lg btn-success")}}
     </form>

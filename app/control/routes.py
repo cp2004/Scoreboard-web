@@ -16,6 +16,10 @@ def new_game():
     if form.validate_on_submit():
         if not session.is_active():
             game = Game(form.player1.data, form.player2.data) #Need to define first serve...
+            if form.serving.data == 'p1':
+                game.setServe(game.player1)
+            else:
+                game.setServe(game.player2)
             session.setSession(game)
             return redirect(url_for('control.game', gameid=session.getSessionId()))
         else:
@@ -30,19 +34,22 @@ def game(gameid):
         return redirect(url_for('main.index'))
     return render_template('control/game.html', title="Game in Progress")
 
-@bp.route('/game/data/score', methods=['GET', 'POST'])
-def backend():
+@bp.route('/game/data/scoreboard', methods=['GET', 'POST'])
+def scoreboard():
     game = session.getSession()
-    if request.method == 'GET':
-        player1_score = game.getScore(game.player1)
-        player2_score = game.getScore(game.player2)
-        return "{} - {}".format(player1_score, player2_score)
-    elif request.method == 'POST':
+    if request.method == 'POST':
         data = request.json
         if data['command'] == 'p1':
             game.Score(game.player1)
         elif data['command'] == 'p2':
             game.Score(game.player2)
-        player1_score = game.getScore(game.player1)
-        player2_score = game.getScore(game.player2)
-        return "{} - {}".format(player1_score, player2_score)
+    data = ScoreboardData()
+    data.player1_score = game.getScore(game.player1)
+    data.player2_score = game.getScore(game.player2)
+    data.serving = game.getServe()
+    return render_template('control/scoreboard.html', data=data)
+
+class ScoreboardData():
+    player1_score = 0
+    player2_score = 0
+    serving = 0
