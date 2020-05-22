@@ -43,6 +43,10 @@ def scoreboard():
             game.Score(game.player1)
         elif data['command'] == 'p2':
             game.Score(game.player2)
+        elif data['command'] == 'subp1':
+            game.subtract(game.player1)
+        elif data['command'] == 'subp2':
+            game.subtract(game.player2)
     data = ScoreboardData()
     data.player1_score = game.getScore(game.player1)
     data.player2_score = game.getScore(game.player2)

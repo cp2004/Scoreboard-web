@@ -7,6 +7,12 @@
         else if (player == 2){ var content = {'command':'p2'}}
         postAjax(url, content, updateScore)
     }
+    function ScoreSubtract(player) {
+        var url = "/game/data/scoreboard"
+        if (player == 1){ var content = {'command':'subp1'}}
+        else if (player == 2){var content = {'command':'subp2'}}
+        postAjax(url, content, updateScore)
+    }
 
     function getScore() {
         var url = "/game/data/scoreboard?t=" + Math.random();

@@ -1,2 +1,41 @@
-<h1>{{ data.player1_score }} - {{ data.player2_score }}</h1>
-<h3>Serving = Player {{ data.serving }}</h3>
+<div class="col-md-12">
+    <div class="row">
+        <div class="col-md-5 border border-thick rounded-lg {% if data.serving == 1 %} border-warning {% else %} border-secondary {% endif %}">
+            <div class="row">
+                <div class="col-3 d-flex justify-content-center align-items-center ">
+                    <button type="button" class="btn btn-outline-success btn-icon" onclick="ScoreSubtract(1)">
+                        <i class="far fa-minus-square fa-3x"></i>
+                    </button>
+                </div>
+                <div class="col-6">
+                    <h1 class="display-2">{{ data.player1_score }}<br></h1>
+                </div>
+                <div class="col-3 d-flex justify-content-center align-items-center">
+                    <button type="button" class="btn btn-outline-success btn-icon" onclick="Score(1)">
+                        <i class="far fa-plus-square fa-3x"></i>
+                    </button>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-2">
+            <h1 class="display-2">-</h1>
+        </div>
+        <div class="col-md-5 border border-thick rounded-lg {% if data.serving == 2 %} border-warning {% else %} border-secondary {% endif %}">
+            <div class="row">
+                <div class="col-3 d-flex justify-content-center align-items-center">
+                    <button type="button" class="btn btn-outline-success btn-icon" onclick="ScoreSubtract(2)">
+                        <i class="far fa-minus-square fa-3x"></i>
+                    </button>
+                </div>
+                <div class="col-6">
+                    <h1 class="display-2">{{ data.player2_score }}</h1>
+                </div>
+                <div class="col-3 d-flex justify-content-center align-items-center">
+                    <button type="button" class="btn btn-outline-success btn-icon" onclick="Score(2)">
+                        <i class="far fa-plus-square fa-3x"></i>
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
