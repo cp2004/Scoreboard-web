@@ -5,23 +5,33 @@
     <form action="" method="post" role="form">
         {{ form.hidden_tag() }}
         <h1 class="h3 mb-3 font-weight-normal">Start a new game</h1>
-        <div class="form-group">
-            <label for="player1">Player 1:</label>
-            {{ form.player1(class_="form-control")}}
-        </div>
-        <div class="form-group">
-            <label for="player2">Player 2:</label>
-            {{ form.player2(class_="form-control") }}
-        </div>
-        <div class="form-group">
-            <label for="serving">Select first serve: </label>
-            <div class="custom-control custom-radio custom-control-inline">
-                <input class="custom-control-input" id="serving-0" name="serving" type="radio" value="p1">
-                <label class="custom-control-label" for="serving-0">Player 1</label>
+        <div class="form-group row">
+            <div class="col-sm-3">
+                <label for="player1">Player 1:</label>
             </div>
-            <div class="custom-control custom-radio custom-control-inline">
-                <input class="custom-control-input" id="serving-1" name="serving" type="radio" value="p2">
-                <label class="custom-control-label" for="serving-1">Player 2</label>
+            <div class="col-sm-6">
+                {{ form.player1(class_="form-control")}}
+            </div>
+            <div class="col-sm-3">
+                <div class="custom-control custom-radio custom-control-inline">
+                    <input class="custom-control-input" id="serving-0" name="serving" type="radio" value="p1">
+                    <label class="custom-control-label" for="serving-0">Serves First</label>
+                </div>
+            </div>
+        </div>
+        <br>
+        <div class="form-group row">
+            <div class="col-sm-3">
+                <label for="player2">Player 2:</label>
+            </div>
+            <div class="col-sm-6">
+                {{ form.player2(class_="form-control")}}
+            </div>
+            <div class="col-sm-3">
+                <div class="custom-control custom-radio custom-control-inline">
+                    <input class="custom-control-input" id="serving-1" name="serving" type="radio" value="p2">
+                    <label class="custom-control-label" for="serving-1">Serves First</label>
+                </div>
             </div>
         </div>
         <br>

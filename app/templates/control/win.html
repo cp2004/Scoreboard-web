@@ -1,0 +1,21 @@
+<div class="text-center" style="background-image: url({{ url_for('static', filename='img/confetti-background.png') }}); background-size: cover;">
+    <div class="container">
+        <div class="row">
+            <div class="bg-win p-5 mx-auto col-md-4">
+                <h3 class="display-3">{{winner.name}}</h3>
+                <p class="mb-3 lead">
+                    won against {{ winner.against }}
+                </p>
+                <p class="mb-4" >
+                    Score was {{ winner.score }} - {{ winner.against_score }}
+                    <br>
+                    Would you like to save the game?
+                </p>
+                <div class="btn-group btn-group-lg">
+                    <a href="{{ url_for('control.save_game') }}" class="btn btn-success">Yes</a>
+                    <a href="{{ url_for('control.discard_game') }}" class="btn btn-danger">No</a>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

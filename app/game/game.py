@@ -10,6 +10,12 @@ class Game():
     
     def getScore(self, Player):
         return Player.score
+    
+    def getWinner(self):
+        if self.winner:
+            return self.winner
+        else:
+            return False
 
     def Score(self, Player):
         #called on every score, arg for player
@@ -55,7 +61,6 @@ class Game():
         self.pointsServed = 0
 
     def Win(self, Player):
-        Player.wins += 1
         self.winner = Player
 
     def getServe(self):
@@ -90,7 +95,6 @@ class Player():
     def __init__(self, user):
         """Player Object."""
         self.score = 0
-        self.wins = 0
         self.ServingFirst = False
         self.user = user
 

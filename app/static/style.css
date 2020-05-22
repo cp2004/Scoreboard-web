@@ -8,3 +8,9 @@
   width: 90%;
   border: none;
 }
+.bg-win {
+  background-color: #ffffff;
+  border: 1px solid #28a745;
+  border-radius: 0.5rem;
+  border-width: 5px;
+}

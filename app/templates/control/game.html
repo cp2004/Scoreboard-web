@@ -1,14 +1,27 @@
 {% extends 'base.html' %}
 
 {% block content %}
-<div class="row text-center scoreboard" id="scoreboard">
-    <!-- REPLACED BY JS on load-->
-    <div class="col-md-12 border rounded-lg border-secondary text-center">
-            <div class="text-center">
-                <div class="spinner-grow text-success" style="width: 5rem; height: 5rem;" role="status">
-                    <span class="sr-only">Loading...</span>
-                </div>
+<div class="row text-center scoreboard">
+    <div class="col-md-12">
+        <div class="row" >
+            <div class="col-md-5">
+                <h3>{{ players['player1'] }}</h3>
             </div>
+            <div class="col-md-2">
+                <h3>Vs.</h3> 
+            </div>
+            <div class="col-md-5">
+                <h3>{{ players['player2'] }}</h3>
+            </div>
+        </div>
+    </div>
+    <div class="col-md-12" id="scoreboard">
+        <!-- REPLACED BY JS on load-->
+        <div class="text-center">
+            <div class="spinner-grow text-success" style="width: 5rem; height: 5rem;" role="status">
+                <span class="sr-only">Loading...</span>
+            </div>
+        </div>
     </div>
 </div>
 {% include 'control/gamescript.html' %}
