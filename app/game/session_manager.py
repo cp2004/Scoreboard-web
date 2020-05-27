@@ -21,3 +21,6 @@ class Session_Manager():
     
     def getSessionId(self):
         return self.sessionid
+
+    def setSessionId(self, id):
+        self.sessionid = id

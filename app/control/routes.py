@@ -1,10 +1,10 @@
-from app import db, session
+from app import db, session, game_data
 from app.control import bp
 from app.control.forms import NewGame_form
 from app.game.game import Game as ttGame
 from flask import url_for, render_template, request, redirect, flash
 from flask_login import current_user, login_required, login_user, logout_user
-from app.models import User, Game
+from app.models import User
 
 @bp.route('/game/new', methods=['GET', 'POST'])
 @login_required
@@ -15,6 +15,9 @@ def new_game():
     form.player2.choices = [(user.id, user.username) for user in users]
     if form.validate_on_submit():
         if not session.is_active():
+            sessionid = game_data.getLast_Index()
+            if sessionid:
+                session.setSessionId(sessionid)
             game = ttGame(form.player1.data, form.player2.data) #Need to define first serve...
             if form.serving.data == 'p1':
                 game.setServe(game.player1)
@@ -83,20 +86,22 @@ class WinnerData():
     against_score = None
 
 @bp.route('/game/save')
+@login_required
 def save_game():
-    game = session.getSession
-    savegame = Game(player1=game.player1.user,
-                    player2=game.player2.user,
-                    player1_score=game.getScore(game.player1),
-                    player2_score=game.getScore(game.player2),
-                    winner=game.getWinner().user)
-    db.session.add(savegame)
-    db.session.commit()
+    game = session.getSession()
+    game_data.saveGame(session.getSessionId(),
+                        game.player1.user,
+                        game.player2.user,
+                        game.getScore(game.player1),
+                        game.getScore(game.player2),
+                        )
+
     session.endSession()
     flash('Game saved', category='success')
     return redirect(url_for('main.index'))
 
 @bp.route('/game/discard')
+@login_required
 def discard_game():
     session.endSession()
     return redirect(url_for('main.index'))

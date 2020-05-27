@@ -1,7 +1,7 @@
 from flask import render_template, redirect, url_for, flash, request
 from werkzeug.urls import url_parse
 from flask_login import login_user, logout_user, current_user
-from app import db
+from app import db, game_data
 from app.auth import bp
 from app.auth.forms import LoginForm, RegistrationForm
 from app.models import User
@@ -39,6 +39,8 @@ def register():
         user.set_password(form.password.data)
         db.session.add(user)
         db.session.commit()
+        userid = User.query.filter_by(username=form.username.data).first_or_404().id
+        game_data.newUser(userid)
         flash('Congratulations, you are now a registered user!', category='success')
         return redirect(url_for('auth.login'))
     return render_template('auth/register.html', title='Register', form=form)

@@ -18,18 +18,6 @@ class User(UserMixin, db.Model):
     def check_password(self, password):
         return check_password_hash(self.password_hash, password)
         
-class Game(db.Model):
-    id = db.Column(db.Integer, primary_key=True)
-    player1 = db.Column(db.Integer) #ID of player 1
-    player2 = db.Column(db.Integer) #ID of player 2
-    timestamp = db.Column(db.DateTime(), index=True, default=datetime.utcnow)
-    player1_score = db.Column(db.Integer) #P1 Score
-    player2_score = db.Column(db.Integer) #P2 Score
-    winner = db.Column(db.Integer) #ID of winner (Could be done from scores but this is quicker)
-
-    def __repr__(self):
-        return '<Game between {} and {} scored {}-{} at {}>'.format(self.player1, self.player2, self.player1_score, self.player2_score, self.timestamp)
-
 @login.user_loader
 def load_user(id):
     return User.query.get(int(id))
