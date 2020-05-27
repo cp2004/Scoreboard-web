@@ -1,9 +1,12 @@
 #handle each screen with calls from the mainloop
 #Also initialize and setup matrix
 from rgbmatrix import graphics, RGBMatrix, RGBMatrixOptions
-import time
+import time, os
 from PIL import Image
 from .colours import Colours
+
+basedir = os.path.dirname(__file__)
+RESOURCES_DIR = os.path.join(basedir, 'resources')
 
 class Matrix():
     def __init__(self):
@@ -28,9 +31,9 @@ class Matrix():
         self.matrix = RGBMatrix(options = options)
         #FONTS
         self.ScoreFont = graphics.Font()
-        self.ScoreFont.LoadFont("resources/fonts/6x13.bdf") #6px X 9px
+        self.ScoreFont.LoadFont(os.path.join(RESOURCES_DIR, 'fonts', '6x13.bdf')) #6px X 9px
         self.winFont = graphics.Font()
-        self.winFont.LoadFont("resources/fonts/5x8.bdf")
+        self.winFont.LoadFont(os.path.join(RESOURCES_DIR, 'fonts', '5x8.bdf'))
         #COLOURS
         self.colour = Colours()
 
@@ -67,8 +70,8 @@ class Matrix():
             time.sleep(0.004)
         
         #Theaterchase with player text
-        image1 = Image.open("resources/images/Win-Chase-1.png").convert('RGB')
-        image2 = Image.open("resources/images/Win-Chase-2.png").convert('RGB')
+        image1 = Image.open(os.path.join(RESOURCES_DIR, 'images', 'Win-Chase-1.png')).convert('RGB')
+        image2 = Image.open(os.path.join(RESOURCES_DIR, 'images', 'Win-Chase-2.png')).convert('RGB')
         wintxt = '{} WINS'.format(name)
         count = 0
         xpos = 2
