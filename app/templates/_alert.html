@@ -40,7 +40,6 @@
 
     {% with errors = get_flashed_messages(category_filter=["error"]) %}
     {% if errors %}
-    <h1>Errors found</h1>
     {% for msg in errors %}
     <div class="alert alert-dismissable alert-danger fade show">
         <strong>Error: </strong> {{ msg }}
