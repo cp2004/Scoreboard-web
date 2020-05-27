@@ -1,10 +1,13 @@
-from app import db, session, game_data
+from app import db, session, game_data, IS_RPI
+if IS_RPI:
+    from app import matrix
 from app.control import bp
 from app.control.forms import NewGame_form
 from app.game.game import Game as ttGame
 from flask import url_for, render_template, request, redirect, flash
 from flask_login import current_user, login_required, login_user, logout_user
 from app.models import User
+import threading, sys
 
 @bp.route('/game/new', methods=['GET', 'POST'])
 @login_required
@@ -65,6 +68,9 @@ def scoreboard():
         else:
             winner.against = User.query.filter_by(id=game.player1.user).first_or_404().username
             winner.against_score = game.getScore(game.player1)
+        if IS_RPI:
+            winAnim = threading.Thread(target=matrix.WinAnimation, args=(winner.name))
+            winAnim.start()
         return render_template('control/win.html', title="Game Won", winner=winner)
     
     else:
@@ -72,6 +78,9 @@ def scoreboard():
         data.player1_score = game.getScore(game.player1)
         data.player2_score = game.getScore(game.player2)
         data.serving = game.getServe()
+        #Matrix view - Option to enable/disable soon?
+        if IS_RPI:
+            matrix.Scores(data.player1_score, data.player2_score, data.serving)
         return render_template('control/scoreboard.html', data=data)
 
 class ScoreboardData():

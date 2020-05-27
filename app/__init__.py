@@ -10,6 +10,12 @@ from config import Config
 
 from app.game.session_manager import Session_Manager
 from app.data.game_data import GameData
+try:
+    from app.matrix.graphics import Matrix
+    IS_RPI = True
+except ImportError or ModuleNotFoundError:
+    IS_RPI = False
+
 
 db = SQLAlchemy()
 migrate = Migrate()
@@ -20,6 +26,8 @@ moment = Moment()
 
 session = Session_Manager()
 game_data = GameData()
+if IS_RPI:
+    matrix = Matrix()
 
 def create_app(config_class=Config):
     app = Flask(__name__)
