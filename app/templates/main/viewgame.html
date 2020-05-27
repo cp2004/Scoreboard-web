@@ -1,0 +1,14 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<div class="jumbotron">
+    <div class="container">
+        <h3>
+            {{ winner.username }} Won against {% if winner == player1 %}{{ player2_user.username }}{% else %}{{ player1_user.username}}{% endblock %}
+        </h3>
+        <p>
+            Score: {{ game.player1_score }} - {{ game.player2_score }}
+        </p>
+    </div>
+</div>
+{% endblock %}

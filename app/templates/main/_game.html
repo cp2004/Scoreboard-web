@@ -1,0 +1,41 @@
+<div class="col-md-3">
+    <div class="card mb-3 shadow">
+        <div class="card-body">
+            {% set gameData = game_data.loadGame(game) %}
+            {% set player1_user = User.query.get(gameData['player1']['id']) %}
+            {% set player2_user = User.query.get(gameData['player2']['id']) %}
+            {% set winner_user = User.query.get(gameData['winner']) %}
+            <h5 class="card-title">
+                {{ player1_user.username }} played {{ player2_user.username }}
+            </h5>
+            <p class="card-text">
+                Score was {{ gameData['player1']['score'] }} - {{ gameData['player2']['score'] }}, 
+                so {{ winner_user.username }} won
+            </p>
+            <div class="d-flex justify-content-between align-items-center">
+                <div clas="btn-group">
+                    {% if player1_user.id == current_user.id or player2_user.id == current_user.id %}<button type="button" class="btn btn-sm btn-outline-danger" data-toggle="modal" data-target="#exampleModal">Delete</button>{% endif %}                    
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+            <h5 class="modal-title" id="exampleModalLabel">Are you sure?</h5>
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+            </button>
+            </div>
+            <div class="modal-body">
+                Are you sure you want to delete your post? This cannot be undone.
+            </div>
+            <div class="modal-footer">
+            <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+            <a href="{{ url_for('main.delete_game', id=game) }}" type="button" class="btn btn-danger">Delete</a>
+            </div>
+        </div>
+    </div>
+</div>

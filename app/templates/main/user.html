@@ -1,0 +1,28 @@
+{% extends "base.html" %}
+
+{% block content %}
+<div class="jumbotron">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-6">
+                <div class="intro border border-secondary rounded-lg text-center">
+                    <h2><b>{{ user.username }}</b></h2>
+                    {% if user.about_me %}
+                    <h4 class="text-secondary">{{ user.about_me}}</h4>
+                    {% endif  %}
+                </div>
+            </div>
+            <div class="col-md-6 text-center">
+                <p>List number of wins-losses here?</p>
+            </div>
+        </div>
+    </div>
+</div>
+<div class ="container">
+    <div class="row">
+        {% for game in games %}
+            {% include 'main/_game.html' %}
+        {% endfor %}
+    </div>
+</div>
+{% endblock %}

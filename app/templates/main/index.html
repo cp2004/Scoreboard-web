@@ -5,7 +5,11 @@
     <div class="container">
         <div class="row">
             <div class="col-md-6 text-center">
+                {% if currentSession %}
+                <a href="{{ url_for('control.game', game_id=currentSession) }}" class="btn btn-secondary btn-success">Current Game</a>
+                {% else %}
                 <a href="{{ url_for('control.new_game') }}" class="btn btn-secondary btn-block">New Game</a>
+                {% endif %}
             </div>
             <div class="col-md-6 text-center">
                 Hi
@@ -14,22 +18,10 @@
     </div>
 </div>
 <div class ="container">
-    <nav aria-label="Page navigation" class="text-center">
-        <ul class="pagination">
-          <li class="page-item {% if not prev_url %} disabled{% endif %}">
-              <a class="page-link" href="{{ prev_url or '#' }}">Previous
-                <span aria-hidden="true">&laquo;</span>
-              </a>
-            </li>
-          <li class="page-item {% if not next_url %} disabled{% endif %}">
-              <a class="page-link" href="{{ next_url or '#' }}">Next
-                <span aria-hidden="true">&raquo;</span>
-              </a>
-            </li>
-        </ul>
-    </nav>
     <div class="row">
-        recent games here...?
+        {% for game in games['games'] %}
+            {% include 'main/_game.html' %}
+        {% endfor %}
     </div>
 </div>
 {% endblock %}

@@ -20,6 +20,9 @@
         <li {% if request.path == url_for('control.new_game') %} class="nav-item active" {% else %} class="nav-item" {% endif %}>
           <a class="nav-link" href="{{ url_for('control.new_game') }}">New Game</a>
         </li>
+        <li {% if request.path == url_for('main.user', username=current_user.username) %} class="nav-item active" {% else %} class="nav-item" {% endif %}>
+          <a class="nav-link" href="{{ url_for('main.user', username=current_user.username) }}">Profile</a>
+        </li>
         {% endif %}
       </ul>
     </div>
