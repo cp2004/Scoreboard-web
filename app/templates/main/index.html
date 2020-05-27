@@ -6,7 +6,7 @@
         <div class="row">
             <div class="col-md-6 text-center">
                 {% if currentSession %}
-                <a href="{{ url_for('control.game', game_id=currentSession) }}" class="btn btn-secondary btn-success">Current Game</a>
+                <a href="{{ url_for('control.game', gameid=currentSession) }}" class="btn btn-secondary btn-success">Current Game</a>
                 {% else %}
                 <a href="{{ url_for('control.new_game') }}" class="btn btn-secondary btn-block">New Game</a>
                 {% endif %}
