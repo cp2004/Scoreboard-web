@@ -12,14 +12,14 @@
                 {% endif %}
             </div>
             <div class="col-md-6 text-center">
-                Hi
+                DELETING GAMES DOES NOT WORK
             </div>
         </div>
     </div>
 </div>
 <div class ="container">
     <div class="row">
-        {% for game in games['games'] %}
+        {% for game in reversed(games['games']) %}
             {% include 'main/_game.html' %}
         {% endfor %}
     </div>
