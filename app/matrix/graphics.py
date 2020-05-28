@@ -1,7 +1,8 @@
 #handle each screen with calls from the mainloop
 #Also initialize and setup matrix
+import time, os, sys
+sys.path.append('/home/pi/rpi-rgb-led-matrix/bindings/python')
 from rgbmatrix import graphics, RGBMatrix, RGBMatrixOptions
-import time, os
 from PIL import Image
 from .colours import Colours
 
