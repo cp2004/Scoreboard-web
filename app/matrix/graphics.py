@@ -41,6 +41,7 @@ class Matrix():
         self.colour = Colours()
 
     def Scores(self, Player1Score, Player2Score, Serving):
+        print("Showing scores!")
         P1txt = "{:02}".format(int(Player1Score))
         P2txt = "{:02}".format(int(Player2Score))
         self.matrix.Clear()
