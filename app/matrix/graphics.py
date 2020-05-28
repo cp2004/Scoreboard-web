@@ -28,7 +28,9 @@ class Matrix():
         options.gpio_slowdown = 2
         # Test speed
         #options.show_refresh_rate = 1 #~530HZ on wiimote version
+        print("Initialising matrix...")
         self.matrix = RGBMatrix(options = options)
+        print("done")
         #FONTS
         self.ScoreFont = graphics.Font()
         self.ScoreFont.LoadFont(os.path.join(RESOURCES_DIR, 'fonts', '6x13.bdf')) #6px X 9px

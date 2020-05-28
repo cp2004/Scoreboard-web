@@ -13,8 +13,10 @@ from app.data.game_data import GameData
 try:
     from app.matrix.graphics import Matrix
     IS_RPI = True
+    print("Matrix graphics ready")
 except ImportError or ModuleNotFoundError:
     IS_RPI = False
+    print("Matrix graphics not supported")
 
 
 db = SQLAlchemy()
@@ -28,6 +30,7 @@ session = Session_Manager()
 game_data = GameData()
 if IS_RPI:
     matrix = Matrix()
+    print("Matrix initialised")
 
 def create_app(config_class=Config):
     app = Flask(__name__)

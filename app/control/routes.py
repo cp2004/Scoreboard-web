@@ -1,6 +1,7 @@
 from app import db, session, game_data, IS_RPI
 if IS_RPI:
     from app import matrix
+    print("Matix imported and ready to go")
 from app.control import bp
 from app.control.forms import NewGame_form
 from app.game.game import Game as ttGame
