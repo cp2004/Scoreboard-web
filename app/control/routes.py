@@ -81,7 +81,7 @@ def scoreboard():
         data.serving = game.getServe()
         #Matrix view - Option to enable/disable soon?
         if IS_RPI:
-            print("SEND THE SCORE DATA")
+            print("SENDING THE SCORE DATA")
             matrix.Scores(data.player1_score, data.player2_score, data.serving)
         else:
             print("Not a raspberry pi, hmmmm")

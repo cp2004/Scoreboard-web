@@ -30,6 +30,7 @@ session = Session_Manager()
 game_data = GameData()
 if IS_RPI:
     matrix = Matrix()
+    matrix.Scores(1,2,1)
     print("Matrix initialised")
 
 def create_app(config_class=Config):
