@@ -20,6 +20,9 @@ ScoreFont.LoadFont(os.path.join(RESOURCES_DIR, 'fonts', '6x13.bdf'))
 winFont = graphics.Font()
 winFont.LoadFont(os.path.join(RESOURCES_DIR, 'fonts', '5x8.bdf'))
 
+connectFont = graphics.Font()
+connectFont.LoadFont(os.path.join(RESOURCES_DIR, 'fonts', '6x10.bdf'))
+
 def InitMatrix():
     """Class for calling all graphical functions for the matrix."""
     #OPTIONS
@@ -92,9 +95,11 @@ def WinAnimation(matrix, name):
         matrix.Clear()
 
         if count % 2 == 0:
-            matrix.SetImage(image1)
+            #image1_buffer = matrix.SwapOnVSync(image1_buffer)
+            matrix.SetImage(image1, unsafe=False)
         elif count % 2 == 1:
-            matrix.SetImage(image2)
+            #image1_buffer = matrix.SwapOnVSync(image2_buffer)
+            matrix.SetImage(image2, unsafe=False)
         
         if 25 <= count < 50 or 75 <= count:
             colour = green
@@ -112,6 +117,8 @@ def WinAnimation(matrix, name):
             xpos += 1
             if -2 == -(xpos -2):
                 direction = "left"
+
+    matrix.Clear()
 '''
 def SelectBox(self, Left, Right, Colour):
     graphics.DrawLine(self.matrix, Left, 0, Right, 0, Colour)

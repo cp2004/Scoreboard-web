@@ -70,9 +70,10 @@ def scoreboard():
         else:
             winner.against = User.query.filter_by(id=game.player1.user).first_or_404().username
             winner.against_score = game.getScore(game.player1)
-        #if IS_RPI:
-        #    winAnim = threading.Thread(target=matrix.WinAnimation, args=(winner.name))
-        #    winAnim.start()
+        if IS_RPI:
+            winAnim = threading.Thread(target=WinAnimation, args=(matrix_obj, winner.name,))
+            winAnim.start()
+            #WinAnimation(matrix_obj, winner.name)
         return render_template('control/win.html', title="Game Won", winner=winner)
     
     else:
