@@ -9,3 +9,5 @@ AppData
 
 *.pyc
 *.db
+*.sock
+*.ini
