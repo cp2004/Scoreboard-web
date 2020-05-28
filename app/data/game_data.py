@@ -76,7 +76,7 @@ class GameData():
         self.saveIndex()
     
     def removeIndex(self, id_to_remove):
-        self.index['games'].remove(id_to_remove)
+        self.index['games'].remove(int(id_to_remove))
         self.saveIndex()
 
     def saveIndex(self):
@@ -87,7 +87,7 @@ class GameData():
         self.data_manager.writeFile('index', self.users, dir='users')
 
     def removeIndex_user(self, id_to_remove):
-        self.users['users'].remove(id_to_remove)
+        self.users['users'].remove(int(id_to_remove))
         self.saveIndex()
     
     def saveIndex_users(self):
@@ -132,10 +132,10 @@ class GameData():
 
         #remove game from users
         player1 = self.loadUser(game['player1']['id'])
-        player1['games'].remove(id)
+        player1['games'].remove(int(id))
         self.data_manager.writeFile(player1['id'], player1, dir='users')
         player2 = self.loadUser(game['player2']['id'])
-        player2['games'].remove(id)
+        player2['games'].remove(int(id))
         self.data_manager.writeFile(player2['id'], player2, dir='users')
 
         #remove game from index

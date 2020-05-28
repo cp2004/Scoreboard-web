@@ -29,9 +29,6 @@ session = Session_Manager()
 game_data = GameData()
 if IS_RPI:
     matrix_obj = InitMatrix()
-    Start(matrix_obj)
-    time.sleep(5)
-    Clear(matrix_obj)
 
 def create_app(config_class=Config):
     app = Flask(__name__)
