@@ -1,7 +1,8 @@
 from app import db, session, game_data, IS_RPI
 if IS_RPI:
-    from app import matrix
+    from app import matrix_obj
     print("Matix imported and ready to go")
+    from app.matrix.graphics import Scores, WinAnimation, InitMatrix
 from app.control import bp
 from app.control.forms import NewGame_form
 from app.game.game import Game as ttGame
@@ -69,9 +70,9 @@ def scoreboard():
         else:
             winner.against = User.query.filter_by(id=game.player1.user).first_or_404().username
             winner.against_score = game.getScore(game.player1)
-        if IS_RPI:
-            winAnim = threading.Thread(target=matrix.WinAnimation, args=(winner.name))
-            winAnim.start()
+        #if IS_RPI:
+        #    winAnim = threading.Thread(target=matrix.WinAnimation, args=(winner.name))
+        #    winAnim.start()
         return render_template('control/win.html', title="Game Won", winner=winner)
     
     else:
@@ -81,10 +82,7 @@ def scoreboard():
         data.serving = game.getServe()
         #Matrix view - Option to enable/disable soon?
         if IS_RPI:
-            print("SENDING THE SCORE DATA")
-            matrix.Scores(data.player1_score, data.player2_score, data.serving)
-        else:
-            print("Not a raspberry pi, hmmmm")
+            Scores(matrix_obj, data.player1_score, data.player2_score, data.serving)
         return render_template('control/scoreboard.html', data=data)
 
 class ScoreboardData():

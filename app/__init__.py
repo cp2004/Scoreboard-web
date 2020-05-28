@@ -1,6 +1,6 @@
 import logging
 from logging.handlers import RotatingFileHandler
-import os
+import os, time
 from flask import Flask, request, current_app
 from flask_sqlalchemy import SQLAlchemy
 from flask_migrate import Migrate
@@ -11,13 +11,12 @@ from config import Config
 from app.game.session_manager import Session_Manager
 from app.data.game_data import GameData
 try:
-    from app.matrix.graphics import Matrix
+    from app.matrix.graphics import InitMatrix, Start, Clear
     IS_RPI = True
-    print("Matrix graphics ready")
-except ImportError or ModuleNotFoundError:
+    print("Matrix graphics supported")
+except:
     IS_RPI = False
     print("Matrix graphics not supported")
-
 
 db = SQLAlchemy()
 migrate = Migrate()
@@ -29,9 +28,10 @@ moment = Moment()
 session = Session_Manager()
 game_data = GameData()
 if IS_RPI:
-    matrix = Matrix()
-    matrix.Scores(1,2,1)
-    print("Matrix initialised")
+    matrix_obj = InitMatrix()
+    Start(matrix_obj)
+    time.sleep(5)
+    Clear(matrix_obj)
 
 def create_app(config_class=Config):
     app = Flask(__name__)
