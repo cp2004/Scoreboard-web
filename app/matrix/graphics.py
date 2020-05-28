@@ -27,6 +27,8 @@ class Matrix():
         options.led_rgb_sequence = "RGB"
         options.pixel_mapper_config = ""
         options.gpio_slowdown = 2
+        options.drop_privileges = 0
+        options.daemon = 0
         # Test speed
         #options.show_refresh_rate = 1 #~530HZ on wiimote version
         print("Initialising matrix...")
