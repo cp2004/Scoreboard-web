@@ -24,5 +24,10 @@
         </div>
     </div>
 </div>
+<div class="row text-center">
+    <div class="col-md-12">
+        <a href="{{ url_for('control.discard_game') }}" class="btn btn-block btn-outline-danger" >End Game</a>
+    </div>
+</div>
 {% include 'control/gamescript.html' %}
 {% endblock %}

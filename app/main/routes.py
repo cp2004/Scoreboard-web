@@ -9,9 +9,9 @@ from app.models import User
 @login_required
 def index():
     if session.is_active():
-        currentSession = None
-    else:
         currentSession = session.getSessionId()
+    else:
+        currentSession = None
     games = game_data.getIndex()
 
     return render_template('main/index.html', title="Home", reversed=reversed, currentSession=currentSession, games=games, game_data=game_data, User=User )

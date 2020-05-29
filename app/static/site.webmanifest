@@ -50,6 +50,6 @@
     ],
     "theme_color": "#bfbfbf",
     "background_color": "#bfbfbf",
-    "start_url": "http://cpowell.eu.pythonanywhere.com/index",
+    "start_url": "192.168.0.143",
     "display": "standalone"
 }
