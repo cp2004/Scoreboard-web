@@ -1,0 +1,38 @@
+{% extends "base.html" %}
+
+{% block content %}
+<div class="jumbotron">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-6">
+                <div class="intro text-center">
+                    <h2 id="usernameHeading"><b>{{ form.username.data }}</b></h2>
+                    <h4 id="initialHeading" class="text-secondary">{{ form.initial.data }}</h4>
+                    <h4 id="aboutMeHeading" class="text-secondary">{{ form.about_me.data }}</h4>
+                </div>
+            </div>
+            <div class="col-md-6 text-center">
+                {% include 'main/forms/edit-profile-form.html' %}
+            </div>
+            <script>
+                document.getElementById("username").onkeyup = function() {
+                    document.getElementById("usernameHeading").innerText = this.value;
+                 }
+                 document.getElementById("about_me").onkeyup = function() {
+                    document.getElementById("aboutMeHeading").innerText = this.value;
+                 }
+                 document.getElementById("initial").onkeyup = function() {
+                    document.getElementById("initialHeading").innerText = this.value;
+                 }
+            </script>
+        </div>
+    </div>
+</div>
+<div class ="container">
+    <div class="row">
+        {% for game in games['games'] %}
+            {% include 'main/_game.html' %}
+        {% endfor %}
+    </div>
+</div>
+{% endblock %}

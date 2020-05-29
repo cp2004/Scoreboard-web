@@ -1,0 +1,49 @@
+<form action="" method="post" class="form" novalidate role="form">
+    <h2>Edit your profile</h2>
+    <div class="form-group row">
+        {{ form.hidden_tag() }}
+        {{ form.username.label(class_="col-sm-3 col-form-label") }}
+        <div class="col-sm-9">
+            {% if form.username.errors %}
+            {{ form.username (class_="form-control is-invalid") }}
+            {% else %}
+            {{ form.username(class_="form-control") }}
+            {% endif %}
+            {% if form.username.errors %}
+                <div class="invalid-feedback">
+                    Please enter a valid username (No spaces)
+                </div>
+            {% endif %}
+            <small id="usernameHelp" class="form-text text-muted">Edit your username</small>    
+        </div>
+    </div>
+    <div class="form-group row text-center">
+        {{ form.initial.label(class_="col-sm-3 col-form-label") }}
+        <div class="col-sm-9">
+        {% if form.initial.errors %}
+        {{ form.initial(class_="form-control is-invalid") }}
+        <div class="invalid-feedback">
+            Only 2 characters allowed
+        </div>
+        {% else %}
+        {{ form.initial(class_="form-control") }}
+        {% endif %}
+        <small id="initialHelp" class="form-text text-muted">Initials are shown on the matrix scoreboard</small>
+        </div>
+    </div>
+    <div class="form-group row text-center">
+        {{ form.about_me.label(class_="col-sm-3 col-form-label") }}
+        <div class="col-sm-9">
+            {% if form.about_me.errors %}
+            {{ form.about_me(class_="form-control is-invalid") }}
+            <div class="invalid-feedback">
+                Do it properly
+            </div>
+            {% else %}
+            {{ form.about_me(class_="form-control") }}
+            {% endif %}
+            <small id="about_meHelp" class="form-text text-muted">Write something about yourself</small>
+        </div>
+    </div>
+    {{ form.submit(class_="btn btn-block btn-outline-success") }}
+</form>
