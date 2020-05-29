@@ -23,6 +23,9 @@ winFont.LoadFont(os.path.join(RESOURCES_DIR, 'fonts', '5x8.bdf'))
 connectFont = graphics.Font()
 connectFont.LoadFont(os.path.join(RESOURCES_DIR, 'fonts', '6x10.bdf'))
 
+initialFont = graphics.Font()
+initialFont.LoadFont(os.path.join(RESOURCES_DIR, 'fonts', '4x6.bdf'))
+
 def InitMatrix():
     """Class for calling all graphical functions for the matrix."""
     #OPTIONS
@@ -46,13 +49,17 @@ def InitMatrix():
 
     return RGBMatrix(options = options)
 
-def Scores(matrix, Player1Score, Player2Score, Serving):
+def Scores(matrix, Player1Score, Player2Score, Serving, Player1Initial=None, Player2Initial=None):
     P1txt = "{:02}".format(int(Player1Score))
     P2txt = "{:02}".format(int(Player2Score))
     matrix.Clear()
     graphics.DrawText(matrix, ScoreFont, 1, 10, white, P1txt) # canvas, font, xpos, ypos, color, text
     graphics.DrawLine(matrix, 13, 5, 18, 5, white)
     graphics.DrawText(matrix, ScoreFont, 20, 10, white, P2txt)
+
+    graphics.DrawText(matrix, initialFont, 1, 16, red, Player1Initial)
+    graphics.DrawText(matrix, initialFont, 20, 16, red, Player2Initial)
+
     if Serving == 1:
         graphics.DrawLine(matrix, 0, 11, 15, 11, yellow)
     else:
