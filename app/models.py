@@ -8,6 +8,7 @@ class User(UserMixin, db.Model):
     username = db.Column(db.String(64), index=True, unique=True)
     password_hash = db.Column(db.String(128))
     about_me = db.Column(db.String(140))
+    initial = db.Column(db.String(2))
 
     def __repr__(self):
         return '<User {}>'.format(self.username)
