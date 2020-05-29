@@ -1,8 +1,7 @@
 from app import db, session, game_data, IS_RPI
 if IS_RPI:
     from app import matrix_obj
-    print("Matix imported and ready to go")
-    from app.matrix.graphics import Scores, WinAnimation, InitMatrix
+    from app.matrix.graphics import Scores, WinAnimation, InitMatrix, Clear
 from app.control import bp
 from app.control.forms import NewGame_form
 from app.game.game import Game as ttGame
@@ -81,9 +80,10 @@ def scoreboard():
         data.player1_score = game.getScore(game.player1)
         data.player2_score = game.getScore(game.player2)
         data.serving = game.getServe()
-        #Matrix view - Option to enable/disable soon?
+        player1_User = User.query.get(game.player1.user)
+        player2_User = User.query.get(game.player2.user)
         if IS_RPI:
-            Scores(matrix_obj, data.player1_score, data.player2_score, data.serving)
+            Scores(matrix_obj, data.player1_score, data.player2_score, data.serving, player1_User.initial, player2_User.initial)
         return render_template('control/scoreboard.html', data=data)
 
 class ScoreboardData():
@@ -116,4 +116,6 @@ def save_game():
 @login_required
 def discard_game():
     session.endSession()
+    if IS_RPI:
+        Clear(matrix_obj)
     return redirect(url_for('main.index'))

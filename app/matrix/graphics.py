@@ -57,13 +57,13 @@ def Scores(matrix, Player1Score, Player2Score, Serving, Player1Initial=None, Pla
     graphics.DrawLine(matrix, 13, 5, 18, 5, white)
     graphics.DrawText(matrix, ScoreFont, 20, 10, white, P2txt)
 
-    graphics.DrawText(matrix, initialFont, 1, 16, red, Player1Initial)
-    graphics.DrawText(matrix, initialFont, 20, 16, red, Player2Initial)
+    graphics.DrawText(matrix, initialFont, 3, 16, red, Player1Initial)
+    graphics.DrawText(matrix, initialFont, 22, 16, red, Player2Initial)
 
     if Serving == 1:
-        graphics.DrawLine(matrix, 0, 11, 15, 11, yellow)
+        graphics.DrawLine(matrix, 0, 10, 15, 10, yellow)
     else:
-        graphics.DrawLine(matrix, 16, 11, 31, 11, yellow)
+        graphics.DrawLine(matrix, 16, 10, 31, 10, yellow)
 
 def Start(matrix):
     matrix.Clear()
