@@ -6,13 +6,9 @@
             {% set player2_user = User.query.get(gameData['player2']['id']) %}
             {% set winner_user = User.query.get(gameData['winner']) %}
             <h5 class="card-title">
-                <a href="{{ url_for('main.user', username=player1_user.username) }}">
-                    {{ player1_user.username }}
-                </a>
+                <a href="{{ url_for('main.user', username=player1_user.username) }}">{{ player1_user.username }}</a>
                  played 
-                <a href="{{ url_for('main.user', username=player2_user.username) }}">
-                    {{ player2_user.username }}
-                </a>
+                <a href="{{ url_for('main.user', username=player2_user.username) }}">{{ player2_user.username }}</a>
             </h5>
             <p class="card-text">
                 Score was <strong>{{ gameData['player1']['score'] }} - {{ gameData['player2']['score'] }}</strong>, 
