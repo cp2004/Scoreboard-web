@@ -9,7 +9,7 @@
         <div class="col-md-6 text-center">
             <form action="" method="post" class="form-signin" novalidate role="form">
                 {{ form.hidden_tag() }}
-                <h1 class="h3 mb-3 font-weight-normal">Please sign in</h1>
+                <h1 class="h3 mb-3 font-weight-normal">Please sign in <small class="text-muted">New user? <a href="{{ url_for('auth.register') }}" class="btn btn-outline-warning btn-sm">Register</a></small></h1>
                 <div>
                     {{ form.username.label(class_="sr-only") }}
                     {% if form.username.errors %}
