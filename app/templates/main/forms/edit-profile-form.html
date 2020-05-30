@@ -5,14 +5,14 @@
         {{ form.username.label(class_="col-sm-3 col-form-label") }}
         <div class="col-sm-9">
             {% if form.username.errors %}
-            {{ form.username (class_="form-control is-invalid") }}
-            {% else %}
-            {{ form.username(class_="form-control") }}
-            {% endif %}
-            {% if form.username.errors %}
+            {{ form.username (class_="form-control is-invalid") }}            
+            {% for error in form.username.errors %}    
                 <div class="invalid-feedback">
-                    Please enter a valid username (No spaces)
+                    {{ error }}
                 </div>
+            {% endfor %}
+            {% else %}
+            {{ form.username(class_="form-control")}}
             {% endif %}
             <small id="usernameHelp" class="form-text text-muted">Edit your username</small>    
         </div>
@@ -20,15 +20,17 @@
     <div class="form-group row text-center">
         {{ form.initial.label(class_="col-sm-3 col-form-label") }}
         <div class="col-sm-9">
-        {% if form.initial.errors %}
-        {{ form.initial(class_="form-control is-invalid") }}
-        <div class="invalid-feedback">
-            Only 2 characters allowed
-        </div>
-        {% else %}
-        {{ form.initial(class_="form-control") }}
-        {% endif %}
-        <small id="initialHelp" class="form-text text-muted">Initials are shown on the matrix scoreboard</small>
+            {% if form.initial.errors %}
+            {{ form.initial(class_="form-control is-invalid") }}
+            {% for error in form.initial.errors %}
+            <div class="invalid-feedback">
+                {{ error }}
+            </div>
+            {% endfor %}
+            {% else %}
+            {{ form.initial(class_="form-control") }}
+            {% endif %}
+            <small id="initialHelp" class="form-text text-muted">Initials are shown on the matrix scoreboard</small>
         </div>
     </div>
     <div class="form-group row text-center">
@@ -36,9 +38,11 @@
         <div class="col-sm-9">
             {% if form.about_me.errors %}
             {{ form.about_me(class_="form-control is-invalid") }}
+            {% for error in form.about_me.errors %}
             <div class="invalid-feedback">
-                Do it properly
+                {{ error }}
             </div>
+            {% endfor %}
             {% else %}
             {{ form.about_me(class_="form-control") }}
             {% endif %}

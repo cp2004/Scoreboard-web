@@ -10,13 +10,34 @@
                 <label for="player1">Player 1:</label>
             </div>
             <div class="col-sm-6">
+                {% if form.player1.errors %}
+                {{ form.player1(class_="form-control is-invalid")}}
+                {% for error in form.player1.errors %}
+                <div class="invalid-feedback">
+                    {{ error }}
+                </div>
+                {% endfor %}
+                {% else %}
                 {{ form.player1(class_="form-control")}}
+                {% endif %}
             </div>
             <div class="col-sm-3">
+                {% if form.serving.errors %}
+                <div class="custom-control custom-radio custom-control-inline">
+                    <input class="custom-control-input is-invalid" id="serving-0" name="serving" type="radio" value="p1">
+                    <label class="custom-control-label" for="serving-0">Serves First</label>
+                </div>
+                {% for error in form.serving.errors %}
+                <div class="invalid-feedback">
+                    {{ error }}
+                </div>
+                {% endfor %}
+                {% else %}
                 <div class="custom-control custom-radio custom-control-inline">
                     <input class="custom-control-input" id="serving-0" name="serving" type="radio" value="p1">
                     <label class="custom-control-label" for="serving-0">Serves First</label>
                 </div>
+                {% endif %}
             </div>
         </div>
         <br>
@@ -25,13 +46,34 @@
                 <label for="player2">Player 2:</label>
             </div>
             <div class="col-sm-6">
+                {% if form.player2.errors %}
+                {{ form.player2(class_="form-control is-invalid")}}
+                {% for error in form.player2.errors %}
+                <div class="invalid-feedback">
+                    {{ error }}
+                </div>
+                {% endfor %}
+                {% else %}
                 {{ form.player2(class_="form-control")}}
+                {% endif %}
             </div>
             <div class="col-sm-3">
+                {% if form.serving.errors %}
+                <div class="custom-control custom-radio custom-control-inline">
+                    <input class="custom-control-input is-invalid" id="serving-1" name="serving" type="radio" value="p2">
+                    <label class="custom-control-label" for="serving-1">Serves First</label>
+                </div>
+                {% for error in form.serving.errors %}
+                <div class="invalid-feedback">
+                    {{ error }}
+                </div>
+                {% endfor %}
+                {% else %}
                 <div class="custom-control custom-radio custom-control-inline">
                     <input class="custom-control-input" id="serving-1" name="serving" type="radio" value="p2">
                     <label class="custom-control-label" for="serving-1">Serves First</label>
                 </div>
+                {% endif %}
             </div>
         </div>
         <br>
