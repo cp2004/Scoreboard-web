@@ -3,27 +3,31 @@
     <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarsExample04" aria-controls="navbarsExample04" aria-expanded="false" aria-label="Toggle navigation">
       <span class="navbar-toggler-icon"></span>
     </button>
-  
     <div class="collapse navbar-collapse" id="navbarsExample04">
-      <ul class="navbar-nav mr-auto">
-        <li {% if request.path == url_for('main.index') %} class="nav-item active" {% else %} class="nav-item" {% endif %}>
-          <a class="nav-link" href="{{ url_for('main.index') }}">Home <span class="sr-only">(current)</span></a>
-        </li>
         {% if current_user.is_anonymous %}
-        <li {% if request.path == url_for('auth.login') %} class="nav-item active" {% else %} class="nav-item" {% endif %}>
-          <a class="nav-link" href="{{ url_for('auth.login') }}">Login</a>
-        </li>
+        <ul class="navbar-nav mr-auto">
+            <li {% if request.path == url_for('main.index') %} class="nav-item active" {% else %} class="nav-item" {% endif %}>
+                <a class="nav-link" href="{{ url_for('main.index') }}">Home <span class="sr-only">(current)</span></a>
+            </li>
+        </ul>
+        <div class="btn group">
+            <a class="btn btn-primary" href="{{ url_for('auth.login') }}">Login</a>
+            <a class="btn btn-warning" href="{{ url_for('auth.register') }}">Register</a>
+        </div>
         {% else %}
-        <li {% if request.path == url_for('auth.logout') %} class="nav-item active" {% else %} class="nav-item" {% endif %}>
-            <a class="nav-link" href="{{ url_for('auth.logout') }}">Logout</a>
-        </li>
-        <li {% if request.path == url_for('control.new_game') %} class="nav-item active" {% else %} class="nav-item" {% endif %}>
-          <a class="nav-link" href="{{ url_for('control.new_game') }}">New Game</a>
-        </li>
-        <li {% if request.path == url_for('main.user', username=current_user.username) %} class="nav-item active" {% else %} class="nav-item" {% endif %}>
-          <a class="nav-link" href="{{ url_for('main.user', username=current_user.username) }}">Profile</a>
-        </li>
+        <ul class="navbar-nav mr-auto">
+            <li {% if request.path == url_for('main.index') %} class="nav-item active" {% else %} class="nav-item" {% endif %}>
+            <a class="nav-link" href="{{ url_for('main.index') }}">Home <span class="sr-only">(current)</span></a>
+            </li>
+
+            <li {% if request.path == url_for('control.new_game') %} class="nav-item active" {% else %} class="nav-item" {% endif %}>
+            <a class="nav-link" href="{{ url_for('control.new_game') }}">New Game</a>
+            </li>
+            <li {% if request.path == url_for('main.user', username=current_user.username) %} class="nav-item active" {% else %} class="nav-item" {% endif %}>
+            <a class="nav-link" href="{{ url_for('main.user', username=current_user.username) }}">Profile</a>
+            </li>
+        </ul>
+        <a class="btn btn-danger" href="{{ url_for('auth.logout') }}">Logout</a>
         {% endif %}
-      </ul>
     </div>
   </nav>
