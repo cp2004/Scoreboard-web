@@ -6,8 +6,9 @@
                     <i class="far fa-minus-square fa-3x"></i>
                 </button>
             </div>
-            <div class="col-sm-6 d-flex justify-content-center align-items-center">
-                <h1 class="display-2">{{ data.player1_score }}<br></h1>
+            <div class="col-sm-6">
+                <h3>{{ player1_User.username }}</h3>
+                <h1 class="display-1">{{ data.player1_score }}</h1>
             </div>
             <div class="col-sm-3 d-flex justify-content-center align-items-center">
                 <button type="button" class="btn btn-outline-success btn-icon" onclick="Score(1, this)">
@@ -26,8 +27,9 @@
                     <i class="far fa-minus-square fa-3x"></i>
                 </button>
             </div>
-            <div class="col-sm-6 d-flex justify-content-center align-items-center">
-                <h1 class="display-2">{{ data.player2_score }}</h1>
+            <div class="col-sm-6">
+                <h3>{{ player2_User.username }}</h3>
+                <h1 class="display-1">{{ data.player2_score }}</h1>
             </div>
             <div class="col-sm-3 d-flex justify-content-center align-items-center">
                 <button type="button" class="btn btn-outline-success btn-icon" onclick="Score(2, this)">

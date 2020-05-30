@@ -84,7 +84,7 @@ def scoreboard():
         player2_User = User.query.get(game.player2.user)
         if IS_RPI:
             Scores(matrix_obj, data.player1_score, data.player2_score, data.serving, player1_User.initial, player2_User.initial)
-        return render_template('control/scoreboard.html', data=data)
+        return render_template('control/scoreboard.html', data=data, player1_User=player1_User, player2_User=player2_User)
 
 class ScoreboardData():
     player1_score = 0
