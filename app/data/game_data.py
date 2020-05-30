@@ -113,7 +113,7 @@ class GameData():
         if player1_score > player2_score:
             game['winner'] = player1_id
         else:
-            game['winner'] = player1_id
+            game['winner'] = player2_id
         self.data_manager.writeFile(id, game, dir='games')
         self.addGame_user(player1_id, id)
         self.addGame_user(player2_id, id)
