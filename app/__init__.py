@@ -1,7 +1,4 @@
-import logging
-from logging.handlers import RotatingFileHandler
-import os, time
-from flask import Flask, request, current_app
+from flask import Flask
 from flask_sqlalchemy import SQLAlchemy
 from flask_migrate import Migrate
 from flask_login import LoginManager
@@ -11,10 +8,10 @@ from config import Config
 from app.game.session_manager import Session_Manager
 from app.data.game_data import GameData
 try:
-    from app.matrix.graphics import InitMatrix, Start, Clear
+    from app.matrix.graphics import InitMatrix
     IS_RPI = True
     print("Matrix graphics supported")
-except:
+except ImportError or ModuleNotFoundError:
     IS_RPI = False
     print("Matrix graphics not supported")
 
