@@ -83,7 +83,6 @@ class Game():
         self.pointsServed = 0
 
 
-
 class Player():
     def __init__(self, user):
         """Player Object."""
