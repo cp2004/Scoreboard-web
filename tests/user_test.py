@@ -2,7 +2,7 @@ from datetime import datetime, timedelta
 import unittest
 from app import create_app, db
 from app.models import User
-from config import Config
+from appconfig import Config
 
 class TestConfig(Config):
     TESTING = True
@@ -20,11 +20,21 @@ class UserModelCase(unittest.TestCase):
         db.drop_all()
         self.app_context.pop()
 
+    def test_User_Commit(self):
+        u = User(username='Test1')
+        db.session.add(u)
+        db.session.commit()
+
+        user = User.query.filter_by(username='Test1')
+        self.assertIsNotNone(u, user)
+
     def test_password_hashing(self):
         u = User(username='susan')
         u.set_password('cat')
         self.assertFalse(u.check_password('dog'))
         self.assertTrue(u.check_password('cat'))
+
+    
 
 if __name__ == '__main__':
     unittest.main(verbosity=2)
