@@ -6,6 +6,7 @@ __pycache__
 
 migrations/*
 AppData
+TestData
 
 *.pyc
 *.db
