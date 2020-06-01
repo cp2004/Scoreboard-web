@@ -74,7 +74,7 @@ def scoreboard():
             winAnim.start()
             #WinAnimation(matrix_obj, winner.name)
         return render_template('control/win.html', title="Game Won", winner=winner)
-    
+
     else:
         data = ScoreboardData()
         data.player1_score = game.getScore(game.player1)

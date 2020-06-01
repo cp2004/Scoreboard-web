@@ -42,7 +42,7 @@ class GameData():
         if app:
             self.data_manager = DataManager(app)
             self.checkIndex()
-            
+
     def init_app(self, app):
         self.data_manager = DataManager(app)
         self.checkIndex()

@@ -13,7 +13,7 @@ class GameSaveCase(unittest.TestCase):
         self.app_context = self.app.app_context()
         self.app_context.push()
         db.create_all()
-    
+
     def tearDown(self):
         db.session.remove()
         db.drop_all()
@@ -25,7 +25,7 @@ class GameSaveCase(unittest.TestCase):
 
         self.assertTrue(1 in game_data.users['users'])
         self.assertTrue(2 in game_data.users['users'])
-        
+
     def test_game_save(self):
         game_data.newUser(1)
         game_data.newUser(2)

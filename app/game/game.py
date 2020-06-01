@@ -7,10 +7,10 @@ class Game():
         self.serving = firstServer
         self.pointsServed = 0
         self.winner = None
-    
+
     def getScore(self, Player):
         return Player.score
-    
+
     def getWinner(self):
         if self.winner:
             return self.winner

@@ -5,15 +5,15 @@ from PIL import Image
 
 
 white = graphics.Color(255, 255, 255)
-blue = graphics.Color(0,0,150)
-green = graphics.Color(0,255,0)
+blue = graphics.Color(0, 0, 150)
+green = graphics.Color(0, 255, 0)
 yellow = graphics.Color(255, 255, 0)
-red = graphics.Color(255,0,0)
-blank = graphics.Color(0,0,0)
+red = graphics.Color(255, 0, 0)
+blank = graphics.Color(0, 0, 0)
 
 basedir = os.path.dirname(__file__)
 RESOURCES_DIR = os.path.join(basedir, 'resources')
-    
+
 ScoreFont = graphics.Font()
 ScoreFont.LoadFont(os.path.join(RESOURCES_DIR, 'fonts', '6x13.bdf'))
 

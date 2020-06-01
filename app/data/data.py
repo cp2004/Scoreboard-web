@@ -8,7 +8,7 @@ class DataManager():
 
         if not os.path.isdir(self.DATA_DIR):
             os.mkdir(self.DATA_DIR)
-    
+
     def readFile(self, name, dir=None):
         try:
             with open(self.getPath(name, dir), 'r') as file:
