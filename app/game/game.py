@@ -70,7 +70,7 @@ class Game():
             return 2
 
     def setServe(self, Player):
-        if self.serving == None:
+        if self.serving is None:
             Player.ServingFirst = True
             self.serving = Player
             self.pointsServed = 0
@@ -82,14 +82,6 @@ class Game():
             self.serving = self.player1
         self.pointsServed = 0
 
-    def checkStatus(self):
-        # Possible statuses: Win, Reset(Serve = None)
-        if self.serving == None:
-            return "reset"
-        elif self.winner != None:
-            return "win"
-        else:
-            return "score"
 
 
 class Player():
