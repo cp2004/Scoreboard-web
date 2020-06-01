@@ -2,10 +2,12 @@ import unittest
 from app import create_app, db, game_data
 from config import Config
 
+
 class TestConfig(Config):
     TESTING = True
     SQLALCHEMY_DATABASE_URI = 'sqlite://'
     DATA_DIRECTORY = 'TestData'
+
 
 class GameSaveCase(unittest.TestCase):
     def setUp(self):

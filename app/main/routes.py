@@ -5,6 +5,7 @@ from flask_login import current_user, login_required
 from app.models import User
 from app.main.forms import EditProfileForm
 
+
 @bp.route('/')
 @bp.route('/index')
 @login_required
@@ -15,7 +16,7 @@ def index():
         currentSession = None
     games = game_data.getIndex()
 
-    return render_template('main/index.html', title="Home", reversed=reversed, currentSession=currentSession, games=games, game_data=game_data, User=User )
+    return render_template('main/index.html', title="Home", reversed=reversed, currentSession=currentSession, games=games, game_data=game_data, User=User)
 
 
 @bp.route('/user/<username>')
@@ -25,6 +26,7 @@ def user(username):
     games = game_data.loadUser(user.id)['games']
 
     return render_template('main/user.html', user=user, reversed=reversed, title=user.username, games=games, game_data=game_data, User=User)
+
 
 @bp.route('/edit-profile', methods=['GET', 'POST'])
 @login_required
@@ -45,10 +47,11 @@ def edit_profile():
     games = game_data.getIndex()
     return render_template('main/edit_profile.html', title='Edit Profile', form=form, user=user, games=games, game_data=game_data, User=User)
 
+
 @bp.route('/delete/<id>')
 @login_required
 def delete_game(id):
-    #NEED TO CHECK USER IS ALLOWED
+    # NEED TO CHECK USER IS ALLOWED
     game_data.deletegame(id)
-    #Redirect to previous page?
+    # Redirect to previous page?
     return redirect(url_for('main.index'))

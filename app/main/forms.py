@@ -3,11 +3,12 @@ from wtforms import StringField, SubmitField, TextAreaField
 from wtforms.validators import DataRequired, ValidationError, EqualTo, Length
 from app.models import User
 
+
 class EditProfileForm(FlaskForm):
     username = StringField('Username', validators=[DataRequired("Username is required")])
-    about_me = TextAreaField('About me',validators=[Length(min=0, max=140, message="Max 140 characters")])
+    about_me = TextAreaField('About me', validators=[Length(min=0, max=140, message="Max 140 characters")])
     submit = SubmitField('Save')
-    initial = StringField('Initial', validators=[DataRequired("Initials required"), Length(2,2, message="Initials shoud be 2 characters")])
+    initial = StringField('Initial', validators=[DataRequired("Initials required"), Length(2, 2, message="Initials shoud be 2 characters")])
 
     def __init__(self, original_username, *args, **kwargs):
         super(EditProfileForm, self).__init__(*args, **kwargs)

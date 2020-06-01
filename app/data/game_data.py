@@ -37,6 +37,7 @@ index.json
     }
 '''
 
+
 class GameData():
     def __init__(self, app=None):
         if app:
@@ -52,7 +53,7 @@ class GameData():
             self.index = self.data_manager.readFile('index')
         else:
             empty_index = {
-                'games':[]
+                'games': []
             }
             self.data_manager.writeFile('index', empty_index)
             self.index = empty_index
@@ -61,14 +62,14 @@ class GameData():
             self.users = self.data_manager.readFile('index', dir='users')
         else:
             empty_users = {
-                'users':[]
+                'users': []
             }
             self.data_manager.writeFile('index', empty_users, dir='users')
             self.users = empty_users
 
-    ###################
-    ## Index methods ##
-    ###################
+    #################
+    # Index methods #
+    #################
 
     def getIndex(self):
         return self.index
@@ -82,7 +83,7 @@ class GameData():
     def addIndex(self, id_to_add):
         self.index['games'].append(id_to_add)
         self.saveIndex()
-    
+
     def removeIndex(self, id_to_remove):
         self.index['games'].remove(int(id_to_remove))
         self.saveIndex()
@@ -97,26 +98,26 @@ class GameData():
     def removeIndex_user(self, id_to_remove):
         self.users['users'].remove(int(id_to_remove))
         self.saveIndex()
-    
+
     def saveIndex_users(self):
         self.data_manager.writeFile('users', self.users, dir='users')
 
-    ##################
-    ## Game methods ##
-    ##################
-    
+    ################
+    # Game methods #
+    ################
+
     def saveGame(self, id, player1_id, player2_id, player1_score, player2_score):
         game = {
-            'id':id,
-            'player1':{
-                'id':player1_id,
-                'score':player1_score
+            'id': id,
+            'player1': {
+                'id': player1_id,
+                'score': player1_score
             },
-            'player2':{
-                'id':player2_id,
-                'score':player2_score
+            'player2': {
+                'id': player2_id,
+                'score': player2_score
             },
-            'winner':None
+            'winner': None
         }
         if player1_score > player2_score:
             game['winner'] = player1_id
@@ -134,11 +135,11 @@ class GameData():
 
     def loadGame(self, id):
         return self.data_manager.readFile(id, dir='games')
-    
+
     def deletegame(self, id):
         game = self.loadGame(id)
 
-        #remove game from users
+        # remove game from users
         player1 = self.loadUser(game['player1']['id'])
         player1['games'].remove(int(id))
         self.data_manager.writeFile(player1['id'], player1, dir='users')
@@ -146,20 +147,20 @@ class GameData():
         player2['games'].remove(int(id))
         self.data_manager.writeFile(player2['id'], player2, dir='users')
 
-        #remove game from index
+        # remove game from index
         self.removeIndex(id)
 
-        #remove game file
+        # remove game file
         self.data_manager.deleteFile(id, dir='games')
 
-    ##################
-    ## User methods ##
-    ##################
+    ################
+    # User methods #
+    ################
 
     def newUser(self, user_id):
         user = {
-            'id':user_id,
-            'games':[]
+            'id': user_id,
+            'games': []
         }
         self.data_manager.writeFile(user_id, user, dir='users')
         self.addIndex_user(user_id)

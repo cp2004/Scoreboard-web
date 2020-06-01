@@ -1,4 +1,4 @@
-#Handle scoring, winning etc. and feedback when requested
+# Handle scoring, winning etc. and feedback when requested
 class Game():
     def __init__(self, player1, player2, firstServer=None):
         """Managing game functions for TableTennis."""
@@ -18,11 +18,11 @@ class Game():
             return False
 
     def Score(self, Player):
-        #called on every score, arg for player
+        # called on every score, arg for player
         Player.score += 1
 
         if self.player1.score + self.player2.score >= 20:
-            #if tiebreak scoring
+            # if tiebreak scoring
             self.changeServe()
             if self.player1.score - self.player2.score == 2:
                 self.Win(self.player1)
@@ -30,28 +30,28 @@ class Game():
                 self.Win(self.player2)
 
         elif Player.score == 11:
-            #if won to 11
+            # if won to 11
             self.Win(Player)
 
         else:
-            #all other cases
-            self.pointsServed +=1
+            # all other cases
+            self.pointsServed += 1
 
         if self.pointsServed == 2:
             self.changeServe()
 
     def subtract(self, Player):
-        if Player.score >=1 :
+        if Player.score >= 1:
             Player.score -= 1
 
             if self.player1.score + self.player2.score >= 20:
-                #if tiebreak scoring
+                # if tiebreak scoring
                 self.changeServe()
             elif self.pointsServed == 0:
                 self.changeServe()
                 self.pointsServed = 1
             else:
-                self.pointsServed -=1
+                self.pointsServed -= 1
 
     def reset(self):
         self.winner = None
@@ -83,13 +83,14 @@ class Game():
         self.pointsServed = 0
 
     def checkStatus(self):
-        #Possible statuses: Win, Reset(Serve = None)
+        # Possible statuses: Win, Reset(Serve = None)
         if self.serving == None:
             return "reset"
         elif self.winner != None:
             return "win"
         else:
             return "score"
+
 
 class Player():
     def __init__(self, user):

@@ -26,9 +26,10 @@ connectFont.LoadFont(os.path.join(RESOURCES_DIR, 'fonts', '6x10.bdf'))
 initialFont = graphics.Font()
 initialFont.LoadFont(os.path.join(RESOURCES_DIR, 'fonts', '4x6.bdf'))
 
+
 def InitMatrix():
     """Class for calling all graphical functions for the matrix."""
-    #OPTIONS
+    # OPTIONS
     options = RGBMatrixOptions()
     options.rows = 16
     options.cols = 32
@@ -45,15 +46,16 @@ def InitMatrix():
     options.drop_privileges = 0
     options.daemon = 0
     # Test speed
-    #options.show_refresh_rate = 1 #~530HZ on wiimote version
+    # options.show_refresh_rate = 1 #~530HZ on wiimote version
 
-    return RGBMatrix(options = options)
+    return RGBMatrix(options=options)
+
 
 def Scores(matrix, Player1Score, Player2Score, Serving, Player1Initial=None, Player2Initial=None):
     P1txt = "{:02}".format(int(Player1Score))
     P2txt = "{:02}".format(int(Player2Score))
     matrix.Clear()
-    graphics.DrawText(matrix, ScoreFont, 1, 10, white, P1txt) # canvas, font, xpos, ypos, color, text
+    graphics.DrawText(matrix, ScoreFont, 1, 10, white, P1txt)  # canvas, font, xpos, ypos, color, text
     graphics.DrawLine(matrix, 13, 5, 18, 5, white)
     graphics.DrawText(matrix, ScoreFont, 20, 10, white, P2txt)
 
@@ -65,16 +67,19 @@ def Scores(matrix, Player1Score, Player2Score, Serving, Player1Initial=None, Pla
     else:
         graphics.DrawLine(matrix, 16, 10, 31, 10, yellow)
 
+
 def Start(matrix):
     matrix.Clear()
     graphics.DrawText(matrix, ScoreFont, 1, 10, white, "Starting")
 
+
 def Clear(matrix):
     matrix.Clear()
 
+
 def WinAnimation(matrix, name):
-    #Animation celebrating the winner
-    #Pulsing brightness
+    # Animation celebrating the winner
+    # Pulsing brightness
     max_brightness = matrix.brightness
     count = 0
     while count <= 6:
@@ -85,12 +90,12 @@ def WinAnimation(matrix, name):
             matrix.brightness -= 1
 
         if count % 2 == 0:
-            matrix.Fill(255,0,0)
+            matrix.Fill(255, 0, 0)
         elif count % 2 == 1:
-            matrix.Fill(0,255,0)
+            matrix.Fill(0, 255, 0)
         time.sleep(0.004)
-    
-    #Theaterchase with player text
+
+    # Theaterchase with player text
     image1 = Image.open(os.path.join(RESOURCES_DIR, 'images', 'Win-Chase-1.png')).convert('RGB')
     image2 = Image.open(os.path.join(RESOURCES_DIR, 'images', 'Win-Chase-2.png')).convert('RGB')
     wintxt = '{} WINS'.format(name)
@@ -102,17 +107,15 @@ def WinAnimation(matrix, name):
         matrix.Clear()
 
         if count % 2 == 0:
-            #image1_buffer = matrix.SwapOnVSync(image1_buffer)
             matrix.SetImage(image1, unsafe=False)
         elif count % 2 == 1:
-            #image1_buffer = matrix.SwapOnVSync(image2_buffer)
             matrix.SetImage(image2, unsafe=False)
-        
+
         if 25 <= count < 50 or 75 <= count:
             colour = green
         else:
             colour = red
-        
+
         graphics.DrawText(matrix, connectFont, xpos, 11, colour, wintxt)
         time.sleep(0.1)
         count += 1
@@ -122,14 +125,7 @@ def WinAnimation(matrix, name):
                 direction = "right"
         else:
             xpos += 1
-            if -2 == -(xpos -2):
+            if -2 == -(xpos - 2):
                 direction = "left"
 
     matrix.Clear()
-'''
-def SelectBox(self, Left, Right, Colour):
-    graphics.DrawLine(self.matrix, Left, 0, Right, 0, Colour)
-    graphics.DrawLine(self.matrix, Right, 0, Right, 10, Colour)
-    graphics.DrawLine(self.matrix, Right, 10, Left, 10, Colour)
-    graphics.DrawLine(self.matrix, Left, 10, Left, 0, Colour)
-'''

@@ -15,7 +15,7 @@ class DataManager():
                 data = json.load(file)
                 return data
         except FileNotFoundError:
-            #LOG EVENT: FILE NOT FOUND
+            # LOG EVENT: FILE NOT FOUND
             return None
 
     def writeFile(self, name, data, dir=None):
@@ -25,7 +25,7 @@ class DataManager():
 
         with open(self.getPath(name, dir), 'w') as file:
             json.dump(data, file)
-        
+
     def deleteFile(self, name, dir=None):
         path = self.getPath(name, dir)
         if self.file_exists(name, dir='games'):

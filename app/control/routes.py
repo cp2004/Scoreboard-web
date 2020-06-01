@@ -10,6 +10,7 @@ from flask_login import login_required, login_user, logout_user
 from app.models import User
 import threading
 
+
 @bp.route('/game/new', methods=['GET', 'POST'])
 @login_required
 def new_game():
@@ -22,7 +23,7 @@ def new_game():
             sessionid = game_data.getLast_Index()
             if sessionid:
                 session.setSessionId(sessionid)
-            game = ttGame(form.player1.data, form.player2.data) #Need to define first serve...
+            game = ttGame(form.player1.data, form.player2.data)
             if form.serving.data == 'p1':
                 game.setServe(game.player1)
             else:
@@ -33,6 +34,7 @@ def new_game():
             flash('Game session already created', category='error')
     return render_template('/control/newgame.html', title="New Game", form=form)
 
+
 @bp.route('/game/<gameid>')
 @login_required
 def game(gameid):
@@ -42,8 +44,9 @@ def game(gameid):
     game = session.getSession()
     player1 = User.query.filter_by(id=game.player1.user).first_or_404().username
     player2 = User.query.filter_by(id=game.player2.user).first_or_404().username
-    players = {'player1':player1, 'player2':player2}
+    players = {'player1': player1, 'player2': player2}
     return render_template('control/game.html', title="Game in Progress", players=players)
+
 
 @bp.route('/game/data/scoreboard', methods=['GET', 'POST'])
 def scoreboard():
@@ -72,7 +75,6 @@ def scoreboard():
         if IS_RPI:
             winAnim = threading.Thread(target=WinAnimation, args=(matrix_obj, winner.name,))
             winAnim.start()
-            #WinAnimation(matrix_obj, winner.name)
         return render_template('control/win.html', title="Game Won", winner=winner)
 
     else:
@@ -86,10 +88,12 @@ def scoreboard():
             Scores(matrix_obj, data.player1_score, data.player2_score, data.serving, player1_User.initial, player2_User.initial)
         return render_template('control/scoreboard.html', data=data, player1_User=player1_User, player2_User=player2_User)
 
+
 class ScoreboardData():
     player1_score = 0
     player2_score = 0
     serving = 0
+
 
 class WinnerData():
     name = None
@@ -97,20 +101,22 @@ class WinnerData():
     score = None
     against_score = None
 
+
 @bp.route('/game/save')
 @login_required
 def save_game():
     game = session.getSession()
     game_data.saveGame(session.getSessionId(),
-                        game.player1.user,
-                        game.player2.user,
-                        game.getScore(game.player1),
-                        game.getScore(game.player2),
-                        )
+                       game.player1.user,
+                       game.player2.user,
+                       game.getScore(game.player1),
+                       game.getScore(game.player2),
+                       )
 
     session.endSession()
     flash('Game saved', category='success')
     return redirect(url_for('main.index'))
+
 
 @bp.route('/game/discard')
 @login_required
