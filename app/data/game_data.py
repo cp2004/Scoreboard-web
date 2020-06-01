@@ -38,8 +38,16 @@ index.json
 '''
 
 class GameData():
-    def __init__(self):
-        self.data_manager = DataManager()
+    def __init__(self, app=None):
+        if app:
+            self.data_manager = DataManager(app)
+            self.checkIndex()
+            
+    def init_app(self, app):
+        self.data_manager = DataManager(app)
+        self.checkIndex()
+
+    def checkIndex(self):
         if self.data_manager.file_exists('index'):
             self.index = self.data_manager.readFile('index')
         else:

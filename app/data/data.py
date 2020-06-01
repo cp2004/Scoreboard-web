@@ -1,12 +1,13 @@
 import os, json
 
-basedir = os.path.dirname(__file__)
-DATA_DIR = os.path.join(basedir, 'AppData')
 
 class DataManager():
-    def __init__(self):
-        if not os.path.isdir(DATA_DIR):
-            os.mkdir(DATA_DIR)
+    def __init__(self, app):
+        self.basedir = os.path.dirname(__file__)
+        self.DATA_DIR = os.path.join(self.basedir, app.config['DATA_DIRECTORY'])
+
+        if not os.path.isdir(self.DATA_DIR):
+            os.mkdir(self.DATA_DIR)
     
     def readFile(self, name, dir=None):
         try:
@@ -19,8 +20,8 @@ class DataManager():
 
     def writeFile(self, name, data, dir=None):
         if dir:
-            if not os.path.isdir(os.path.join(DATA_DIR, dir)):
-                os.makedirs(os.path.join(DATA_DIR, dir))
+            if not os.path.isdir(os.path.join(self.DATA_DIR, dir)):
+                os.makedirs(os.path.join(self.DATA_DIR, dir))
 
         with open(self.getPath(name, dir), 'w') as file:
             json.dump(data, file)
@@ -37,6 +38,6 @@ class DataManager():
 
     def getPath(self, name, dir=None):
         if dir:
-            return os.path.join(DATA_DIR, dir, '{}.json'.format(name))
+            return os.path.join(self.DATA_DIR, dir, '{}.json'.format(name))
         else:
-            return os.path.join(DATA_DIR, '{}.json'.format(name))
+            return os.path.join(self.DATA_DIR, '{}.json'.format(name))
