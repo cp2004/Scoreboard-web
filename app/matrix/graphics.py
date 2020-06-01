@@ -1,7 +1,9 @@
-import time, os, sys
+import time
+import os
+import sys
+from PIL import Image
 sys.path.append('/home/pi/rpi-rgb-led-matrix/bindings/python')
 from rgbmatrix import graphics, RGBMatrix, RGBMatrixOptions
-from PIL import Image
 
 
 white = graphics.Color(255, 255, 255)
