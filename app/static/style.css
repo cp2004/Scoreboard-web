@@ -1,15 +1,18 @@
 .scoreboard {
   padding: 3rem;
 }
+
 .border-thick {
   border-width: 5px !important;
 }
+
 .btn-icon {
   width: 90%;
   border: none;
 }
+
 .bg-win {
-  background-color: #ffffff;
+  background-color: #fff;
   border: 1px solid #28a745;
   border-radius: 0.5rem;
   border-width: 5px;
