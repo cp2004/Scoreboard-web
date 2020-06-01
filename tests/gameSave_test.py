@@ -1,6 +1,5 @@
 import unittest
 from app import create_app, db, game_data
-from app.models import User
 from config import Config
 
 class TestConfig(Config):

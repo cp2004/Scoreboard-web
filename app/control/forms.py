@@ -1,8 +1,6 @@
 from flask_wtf import FlaskForm
 from wtforms import SelectField, SubmitField, RadioField
-from wtforms.validators import DataRequired, ValidationError, NoneOf
-from app.models import User
-from flask import current_app
+from wtforms.validators import DataRequired, ValidationError
 
 class NewGame_form(FlaskForm):
     player1 = SelectField('Player 1', validators=[DataRequired("Please select a player")], coerce=int, validate_choice=True)

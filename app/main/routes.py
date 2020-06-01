@@ -1,7 +1,7 @@
 from app import db, session, game_data
 from app.main import bp
 from flask import url_for, render_template, request, redirect, flash
-from flask_login import current_user, login_required, login_user, logout_user
+from flask_login import current_user, login_required
 from app.models import User
 from app.main.forms import EditProfileForm
 

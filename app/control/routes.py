@@ -1,14 +1,14 @@
-from app import db, session, game_data, IS_RPI
+from app import session, game_data, IS_RPI
 if IS_RPI:
     from app import matrix_obj
-    from app.matrix.graphics import Scores, WinAnimation, InitMatrix, Clear
+    from app.matrix.graphics import Scores, WinAnimation, Clear
 from app.control import bp
 from app.control.forms import NewGame_form
 from app.game.game import Game as ttGame
 from flask import url_for, render_template, request, redirect, flash
-from flask_login import current_user, login_required, login_user, logout_user
+from flask_login import login_required, login_user, logout_user
 from app.models import User
-import threading, sys
+import threading
 
 @bp.route('/game/new', methods=['GET', 'POST'])
 @login_required
