@@ -1,7 +1,7 @@
 import unittest
 from app import create_app, db, game_data
 from app.models import User
-from appconfig import Config
+from config import Config
 
 class TestConfig(Config):
     TESTING = True
