@@ -33,12 +33,9 @@
         {% include '_nav.html' %}
         <div class="container">
             <main role="main">
-                <div class="container ">
-                    {% include '_alert.html' %}
-        
-                    {% block content %}
-                    {% endblock %}
-                </div>
+                {% include '_alert.html' %}
+                {% block content %}
+                {% endblock %}
             </main>
         </div>
         <!-- Optional JavaScript -->

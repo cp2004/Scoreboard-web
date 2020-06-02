@@ -16,7 +16,7 @@ def index():
         currentSession = None
     games = game_data.getIndex()
 
-    return render_template('main/index.html', title="Home", reversed=reversed, currentSession=currentSession, games=games, game_data=game_data, User=User)
+    return render_template('main/index.html', user=current_user, title="Home", reversed=reversed, currentSession=currentSession, games=games, game_data=game_data, User=User)
 
 
 @bp.route('/user/<username>')

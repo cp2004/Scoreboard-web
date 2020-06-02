@@ -5,11 +5,16 @@
     <div class="container">
         <div class="row">
             <div class="col-md-6 text-center">
-                {% if currentSession %}
-                <a href="{{ url_for('control.game', gameid=currentSession) }}" class="btn btn-success btn-lg">Current Game</a>
-                {% else %}
-                <a href="{{ url_for('control.new_game') }}" class="btn btn-primary btn-lg">New Game</a>
-                {% endif %}
+                <h1>Welcome, {{ user.username }}</h1>
+                <h3 class="text-secondary">What would you like to do?</h3>
+                <div class="btn-group-vertical btn-lg">
+                    {% if currentSession %}
+                    <a href="{{ url_for('control.game', gameid=currentSession) }}" class="btn btn-success">Go to current game</a>
+                    {% else %}
+                    <a href="{{ url_for('control.new_game') }}" class="btn btn-primary">Create a new game</a>
+                    {% endif %}
+                    <a href="{{ url_for('control.new_game') }}" class="btn btn-secondary">View and edit your profile</a>    
+                </div>
             </div>
             <div class="col-md-6" id="feature_list">
                 <button type="button" class="btn btn-outline-success btn-lg align-center" onclick="getList()">Show List of bugs/features</button>
