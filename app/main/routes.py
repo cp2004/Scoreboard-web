@@ -51,8 +51,9 @@ def edit_profile():
 @bp.route('/delete/<id>')
 @login_required
 def delete_game(id):
-    # NEED TO CHECK USER IS ALLOWED
-    game_data.deletegame(id)
+    game = game_data.loadGame(id)
+    if current_user.id == int(game['player1']['id']) or current_user.id == int(game['player2']['id']):
+        game_data.deletegame(id)
     # Redirect to previous page?
     return redirect(url_for('main.index'))
 
