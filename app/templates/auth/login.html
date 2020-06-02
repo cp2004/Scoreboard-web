@@ -4,12 +4,12 @@
 <div class="container">
     <div class="row">
         <div class="col-md-6">
-            <img class="image-fluid" src="{{ url_for('static', filename='Bike-Colour.svg')}}" alt="Bike Logo"  width="100%">
+            <img class="image-fluid" src="{{ url_for('static', filename='Bats.svg')}}" alt="Two Table Tennis Bats"  width="100%">
         </div>
         <div class="col-md-6 text-center">
             <form action="" method="post" class="form-signin" novalidate role="form">
                 {{ form.hidden_tag() }}
-                <h1 class="h3 mb-3 font-weight-normal">Please sign in <small class="text-muted">New user? <a href="{{ url_for('auth.register') }}" class="btn btn-outline-warning btn-sm">Register</a></small></h1>
+                <h1 class="h3 mb-3 font-weight-normal">Please sign in  <small class="text-muted">New user? <a href="{{ url_for('auth.register') }}" class="btn btn-outline-warning btn-sm">Register</a></small></h1>
                 <div>
                     {{ form.username.label(class_="sr-only") }}
                     {% if form.username.errors %}
