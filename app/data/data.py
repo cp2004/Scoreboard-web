@@ -6,6 +6,7 @@ class DataManager():
     def __init__(self, app):
         self.basedir = os.path.dirname(__file__)
         self.DATA_DIR = os.path.join(self.basedir, app.config['DATA_DIRECTORY'])
+        self.testing = app.config['TESTING']
 
         if not os.path.isdir(self.DATA_DIR):
             os.mkdir(self.DATA_DIR)
