@@ -15,7 +15,7 @@ def index():
     else:
         currentSession = None
     games = game_data.getIndex()
-
+    
     return render_template('main/index.html', user=current_user, title="Home", reversed=reversed, currentSession=currentSession, games=games, game_data=game_data, User=User)
 
 
@@ -36,6 +36,7 @@ def edit_profile():
         current_user.username = form.username.data
         current_user.about_me = form.about_me.data
         current_user.initial = form.initial.data
+        current_user.email = form.email.data
         db.session.commit()
         flash('Your changes have been saved.', category='success')
         return redirect(url_for('main.user', username=current_user.username))
@@ -43,9 +44,10 @@ def edit_profile():
         form.username.data = current_user.username
         form.about_me.data = current_user.about_me
         form.initial.data = current_user.initial
+        form.email.data = current_user.email
 
     games = game_data.getIndex()
-    return render_template('main/edit_profile.html', title='Edit Profile', form=form, user=user, games=games, game_data=game_data, User=User)
+    return render_template('main/edit_profile.html', title='Edit Profile', form=form, user=current_user, games=games, game_data=game_data, User=User)
 
 
 @bp.route('/delete/<id>')

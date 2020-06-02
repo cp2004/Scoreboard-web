@@ -1,10 +1,27 @@
+{% set gameData = game_data.loadGame(game) %}
+{% set player1_user = User.query.get(gameData['player1']['id']) %}
+{% set player2_user = User.query.get(gameData['player2']['id']) %}
+{% set winner_user = User.query.get(gameData['winner']) %}
+{% if winner_user == player1_user %}
+{% set winner_player = 'p1' %}
+{% else %}
+{% set winner_player = 'p2' %}
+{% endif %}
 <div class="col-md-3">
     <div class="card mb-3 shadow">
+        <div class="row">
+            <div class="col-6">
+                <a href="{{ url_for('main.user', username=player1_user.username) }}">
+                    <img src="{{ player1_user.avatar(180) }}" class="card-img" alt="{{ player1_user.username }} profile">
+                </a>
+            </div>
+            <div class="col-6">
+                <a href="{{ url_for('main.user', username=player2_user.username) }}">
+                    <img src="{{ player2_user.avatar(180) }}" class="card-img" alt="{{ player2_user.username }} profile">
+                </a>
+            </div>
+        </div>
         <div class="card-body">
-            {% set gameData = game_data.loadGame(game) %}
-            {% set player1_user = User.query.get(gameData['player1']['id']) %}
-            {% set player2_user = User.query.get(gameData['player2']['id']) %}
-            {% set winner_user = User.query.get(gameData['winner']) %}
             <h5 class="card-title">
                 <a href="{{ url_for('main.user', username=player1_user.username) }}">{{ player1_user.username }}</a>
                  played 

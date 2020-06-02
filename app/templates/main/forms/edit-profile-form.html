@@ -17,6 +17,22 @@
             <small id="usernameHelp" class="form-text text-muted">Edit your username</small>    
         </div>
     </div>
+    <div class="form-group row">
+        {{ form.email.label(class_="col-sm-3 col-form-label") }}
+        <div class="col-sm-9">
+            {% if form.email.errors %}
+            {{ form.email (class_="form-control is-invalid") }}            
+            {% for error in form.email.errors %}    
+                <div class="invalid-feedback">
+                    {{ error }}
+                </div>
+            {% endfor %}
+            {% else %}
+            {{ form.email(class_="form-control")}}
+            {% endif %}
+            <small id="emailHelp" class="form-text text-muted">Edit your email</small>    
+        </div>
+    </div>
     <div class="form-group row text-center">
         {{ form.initial.label(class_="col-sm-3 col-form-label") }}
         <div class="col-sm-9">

@@ -5,10 +5,12 @@
     <div class="container">
         <div class="row">
             <div class="col-md-6">
-                <div class="intro text-center">
+                <div class="intro border border-secondary rounded-lg text-center">
+                    <img src="{{ user.avatar(240) }}" class="rounded-pill image-fluid align-center" width="50%" alt="Profile picture">
                     <h2 id="usernameHeading"><b>{{ form.username.data }}</b></h2>
                     <h4 id="initialHeading" class="text-secondary">{{ form.initial.data }}</h4>
                     <h4 id="aboutMeHeading" class="text-secondary">{{ form.about_me.data }}</h4>
+                    <small>Want to change your profile picture?</small><a href="https://en.gravatar.com/" class="btn btn-sm btn-outline-primary">Gravatar</a>
                 </div>
             </div>
             <div class="col-md-6 text-center">
