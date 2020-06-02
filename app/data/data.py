@@ -38,8 +38,31 @@ class DataManager():
     def file_exists(self, name, dir=None):
         return os.path.isfile(self.getPath(name, dir))
 
-    def getPath(self, name, dir=None):
+    def getPath(self, name, dir=None, filetype='.json'):
         if dir:
-            return os.path.join(self.DATA_DIR, dir, '{}.json'.format(name))
+            if filetype:
+                return os.path.join(self.DATA_DIR, dir, '{}{}'.format(name, filetype))
+            else:
+                return os.path.join(self.DATA_DIR, dir, '{}'.format(name))
         else:
-            return os.path.join(self.DATA_DIR, '{}.json'.format(name))
+            if filetype:
+                return os.path.join(self.DATA_DIR, '{}{}'.format(name, filetype))
+            else:
+                return os.path.join(self.DATA_DIR, '{}'.format(name))
+
+    def remove_all(self, testing=False):
+        if testing:  # Sanity check, should never be used in production
+            if self.testing:  # Second check if testing in config
+                # Remove Games
+                for filename in os.listdir(os.path.join(self.DATA_DIR, 'games')):
+                    path = self.getPath(filename, dir='games', filetype=None)
+                    if os.path.isfile(path):
+                        os.remove(path)
+                for filename in os.listdir(os.path.join(self.DATA_DIR, 'users')):
+                    path = self.getPath(filename, dir='users', filetype=None)
+                    if os.path.isfile(path):
+                        os.remove(path)
+                for filename in os.listdir(self.DATA_DIR):
+                    path = self.getPath(filename, filetype=None)
+                    if os.path.isfile(path):
+                        os.remove(path)
