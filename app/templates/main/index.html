@@ -11,29 +11,35 @@
                 <a href="{{ url_for('control.new_game') }}" class="btn btn-primary btn-lg">New Game</a>
                 {% endif %}
             </div>
-            <div class="col-md-6">
-                <p>
-                    Things that don't work: <s>fixed</s>
-                    <ul>
-                        <li><s>Finding current game session</s></li>
-                        <li><s>Ending Game in progress</s></li>
-                        <li><s>Deleting games is bugged: Always deletes latest game</s></li>
-                        <li><s>Player that won is bugged</s></li>
-                    </ul>
-                    List of features to implement soon: <s>Done</s>
-                    <ul>
-                        <li><s>Editing profiles</s></li>
-                        <li><s>Showing initials on scoreboard</s></li>
-                        <li><s>Buttons for login/logout/register</s>(Add button to login page for register)</li>
-                        <li><s>Error reporting on forms 95% done</s></li>
-                        <li><s>Clearer scoreboard view (Who is P1/P2)</s></li>
-                        <li><s>Click through to profiles</s></li>
-                        <li>Win-Loss and most played against stats etc. on profile</li>
-                        <li>Automated testing</li>
-                        <li><s>Go to 'tabletennis.local' instead of IP address</s></li>
-                    </ul>
-                </p>
+            <div class="col-md-6" id="feature_list">
+                <button type="button" class="btn btn-outline-success btn-lg align-center" onclick="getList()">Show List of bugs/features</button>
             </div>
+            <script>
+                function getList(btn) {
+                    var url;
+                    url = "{{ url_for('main.feature_list') }}";
+                    getAjax(url, showList);
+                }
+                
+                function showList(xhttp) {
+                    document.getElementById('feature_list').innerHTML = xhttp.responseText
+                }
+                
+                function closeList() {
+                    document.getElementById('feature_list').innerHTML = '<button type="button" class="btn btn-outline-success btn-lg align-center" onclick="getList()">Show List of bugs/features</button>'
+                }
+                function getAjax(url, cFunction) {
+                    var xhttp;
+                    xhttp = new XMLHttpRequest();
+                    xhttp.onreadystatechange = function() {
+                        if (this.readyState == 4 && this.status ==200) {
+                            cFunction(this);
+                        }
+                    };
+                    xhttp.open("GET", url, true);
+                    xhttp.send();
+                }
+            </script>
         </div>
     </div>
 </div>

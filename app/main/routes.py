@@ -55,3 +55,9 @@ def delete_game(id):
     game_data.deletegame(id)
     # Redirect to previous page?
     return redirect(url_for('main.index'))
+
+
+@bp.route('/list')
+@login_required
+def feature_list():
+    return render_template('main/feature_list.html')
