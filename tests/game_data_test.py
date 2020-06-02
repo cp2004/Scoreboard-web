@@ -17,20 +17,19 @@ class GameSaveCase(unittest.TestCase):
         db.create_all()
 
     def tearDown(self):
+        game_data.data_manager.remove_all(testing=True)
         db.session.remove()
         db.drop_all()
         self.app_context.pop()
 
-    def test_newUser(self):
-        game_data.newUser(1)
-        game_data.newUser(2)
+    def test_new_user(self):
+        self.create_users(2)
 
         self.assertTrue(1 in game_data.users['users'])
         self.assertTrue(2 in game_data.users['users'])
 
     def test_game_save(self):
-        game_data.newUser(1)
-        game_data.newUser(2)
+        self.create_users(2)
 
         game_data.saveGame(1, 1, 2, 11, 5)
         index = game_data.getIndex()
@@ -41,3 +40,29 @@ class GameSaveCase(unittest.TestCase):
 
         fake_game = game_data.loadGame(1000)
         self.assertIsNone(fake_game)
+
+    def test_user_index(self):
+        self.create_users(2)
+
+        u_index = game_data.users
+        self.assertIn(1, u_index['users'])
+        self.assertIn(2, u_index['users'])
+
+    def test_game_winner(self):
+        self.create_users(2)
+
+        game_data.saveGame(5, 1, 2, 11, 5)
+        game = game_data.loadGame(5)
+        self.assertEqual(game['winner'], 1)
+
+        game_data.saveGame(6, 1, 2, 5, 11)
+        game = game_data.loadGame(6)
+        self.assertEqual(game['winner'], 2)
+
+        game_data.saveGame(7, 2, 1, 3, 11)
+        game = game_data.loadGame(7)
+        self.assertEqual(game['winner'], 1)
+
+    def create_users(self, num_users):
+        for user in range(1, num_users + 1):
+            game_data.newUser(user)
