@@ -13,7 +13,7 @@
                     {% else %}
                     <a href="{{ url_for('control.new_game') }}" class="btn btn-primary">Create a new game</a>
                     {% endif %}
-                    <a href="{{ url_for('main.edit_profile') }}" class="btn btn-secondary">View and edit your profile</a>    
+                    <a href="{{ url_for('main.user', username=user.username) }}" class="btn btn-secondary">View and edit your profile</a>    
                 </div>
             </div>
             <div class="col-md-6" id="feature_list">
