@@ -15,7 +15,7 @@ def index():
     else:
         currentSession = None
     games = game_data.getIndex()
-    
+
     return render_template('main/index.html', user=current_user, title="Home", reversed=reversed, currentSession=currentSession, games=games, game_data=game_data, User=User)
 
 
@@ -23,7 +23,7 @@ def index():
 @login_required
 def user(username):
     user = User.query.filter_by(username=username).first_or_404()
-    games = game_data.loadUser(user.id)['games']
+    games = game_data.loadUser(user.id)
 
     return render_template('main/user.html', user=user, reversed=reversed, title=user.username, games=games, game_data=game_data, User=User)
 
@@ -47,7 +47,7 @@ def edit_profile():
         form.email.data = current_user.email
 
     games = game_data.getIndex()
-    return render_template('main/edit_profile.html', title='Edit Profile', form=form, user=current_user, games=games, game_data=game_data, User=User)
+    return render_template('main/edit_profile.html', reversed=reversed, title='Edit Profile', form=form, user=current_user, games=games, game_data=game_data, User=User)
 
 
 @bp.route('/delete/<id>')

@@ -10,7 +10,7 @@
                     <h2 id="usernameHeading"><b>{{ form.username.data }}</b></h2>
                     <h4 id="initialHeading" class="text-secondary">{{ form.initial.data }}</h4>
                     <h4 id="aboutMeHeading" class="text-secondary">{{ form.about_me.data }}</h4>
-                    <small>Want to change your profile picture?</small><a href="https://en.gravatar.com/" class="btn btn-sm btn-outline-primary">Gravatar</a>
+                    <small>Want to change your profile picture? </small><a href="https://en.gravatar.com/" class="btn btn-sm btn-outline-primary">Gravatar</a>
                 </div>
             </div>
             <div class="col-md-6 text-center">
@@ -32,7 +32,7 @@
 </div>
 <div class ="container">
     <div class="row">
-        {% for game in games['games'] %}
+        {% for game in reversed(games['games']) %}
             {% include 'main/_game.html' %}
         {% endfor %}
     </div>
