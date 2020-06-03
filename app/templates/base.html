@@ -6,14 +6,14 @@
         <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 
         <!-- Icons and formats for 'save to home screen'-->
-        <link rel="apple-touch-icon" sizes="180x180" href="/static/apple-touch-icon.png">
-        <link rel="icon" type="image/png" sizes="32x32" href="/static/favicon-32x32.png">
-        <link rel="icon" type="image/png" sizes="16x16" href="/static/favicon-16x16.png">
-        <link rel="manifest" href="/static/site.webmanifest">
-        <link rel="mask-icon" href="/static/safari-pinned-tab.svg" color="#e61717">
-        <link rel="shortcut icon" href="/static/favicon.ico">
+        <link rel="apple-touch-icon" sizes="180x180" href="/static/apple-touch-icon.png?t=1">
+        <link rel="icon" type="image/png" sizes="32x32" href="/static/favicon-32x32.png?t=1">
+        <link rel="icon" type="image/png" sizes="16x16" href="/static/favicon-16x16.png?t=1">
+        <link rel="manifest" href="/static/site.webmanifest?t=1">
+        <link rel="mask-icon" href="/static/safari-pinned-tab.svg?t=1" color="#e61717">
+        <link rel="shortcut icon" href="/static/favicon.ico?t=1">
         <meta name="msapplication-TileColor" content="#da532c">
-        <meta name="msapplication-config" content="/static/browserconfig.xml">
+        <meta name="msapplication-config" content="/static/browserconfig.xml?t=1">
         <meta name="theme-color" content="#ffffff">
         
         <!-- Fontawesome icons-->
@@ -23,8 +23,8 @@
         <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css" integrity="sha384-9aIt2nRpC12Uk9gS9baDl411NQApFmC26EwAOH8WgZl5MYYxFfc+NcPb1dKGj7Sk" crossorigin="anonymous"> 
         <link rel="stylesheet" href={{ url_for('static', filename='navbar.css') }} >
         <link rel="stylesheet" href={{ url_for('static', filename='style.css') }} >
-        {% if stylesheet=='signin' %}
-            <link href="{{ url_for('static', filename='signin.css')}}" rel="stylesheet">
+        {% if style=='signin' %}
+            <link rel="stylesheet" href="{{ url_for('static', filename='signin.css')}}">
         {% endif %}
             
         <title>{% if title %}{{ title }} | Table Tennis{% else %}Table Tennis Scoreboard{% endif %}</title>
