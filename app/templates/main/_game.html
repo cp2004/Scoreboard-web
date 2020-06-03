@@ -12,20 +12,20 @@
         <div class="row">
             <div class="col-6">
                 <a href="{{ url_for('main.user', username=player1_user.username) }}">
-                    <img src="{{ player1_user.avatar(180) }}" class="card-img" alt="{{ player1_user.username }} profile">
+                    <img src="{{ player1_user.avatar(180) }}" class="card-img {% if winner_player == 'p1' %} border border-success border-thick rounded-lg {% endif %}" alt="{{ player1_user.username }} profile">
                 </a>
             </div>
             <div class="col-6">
                 <a href="{{ url_for('main.user', username=player2_user.username) }}">
-                    <img src="{{ player2_user.avatar(180) }}" class="card-img" alt="{{ player2_user.username }} profile">
+                    <img src="{{ player2_user.avatar(180) }}" class="card-img {% if winner_player == 'p2' %} border border-success border-thick rounded-lg {% endif %}" alt="{{ player2_user.username }} profile">
                 </a>
             </div>
         </div>
         <div class="card-body">
             <h5 class="card-title">
-                <a href="{{ url_for('main.user', username=player1_user.username) }}">{{ player1_user.username }}</a>
+                <a href="{{ url_for('main.user', username=player1_user.username) }}" {% if winner_player == 'p1' %} class="text-success" {% endif %}>{{ player1_user.username }}</a>
                  played 
-                <a href="{{ url_for('main.user', username=player2_user.username) }}">{{ player2_user.username }}</a>
+                <a href="{{ url_for('main.user', username=player2_user.username) }}" {% if winner_player == 'p2' %} class="text-success" {% endif %}>{{ player2_user.username }}</a>
             </h5>
             <p class="card-text">
                 Score was <strong>{{ gameData['player1']['score'] }} - {{ gameData['player2']['score'] }}</strong>, 
