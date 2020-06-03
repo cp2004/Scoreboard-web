@@ -6,12 +6,11 @@
         <div class="col-md-6">
             <img class="image-fluid" src="{{ url_for('static', filename='Bats.svg')}}" alt="Two Table Tennis Bats"  width="100%">
         </div>
-        <div class="col-md-6 text-center">
+        <div class="col-md-6">
             <form action="" method="post" class="form-signin" novalidate role="form">
                 {{ form.hidden_tag() }}
                 <h1 class="h3 mb-3 font-weight-normal">Please sign in  <small class="text-muted">New user? <a href="{{ url_for('auth.register') }}" class="btn btn-outline-warning btn-sm">Register</a></small></h1>
-                <div>
-                    {{ form.username.label(class_="sr-only") }}
+                <div class="form-label-group">
                     {% if form.username.errors %}
                     <input class="form-control is-invalid" id="username" name="username" placeholder="Username" required="" type="text" value="">
                     {% for error in form.username.errors %}
@@ -22,9 +21,10 @@
                     {% else %}
                     <input class="form-control" id="username" name="username" placeholder="Username" required="" type="text" value="">
                     {% endif %}
+                    {{ form.username.label() }}
+
                 </div>
-                <div>
-                    {{ form.password.label(class_="sr-only") }}
+                <div class="form-label-group">
                     {% if form.password.errors %}
                     <input class="form-control is-invalid" id="password" name="password" placeholder="Password" required="" type="password" value="">
                     {% for error in form.password.errors %}
@@ -33,8 +33,9 @@
                     </div>
                     {% endfor %}
                     {% else %}
-                    <input class="form-control" id="password" name="password" placeholder="Password" required="" type="password" value="">
+                    <input class="form-control" id="password" name="password" placeholder="Password" type="password">
                     {% endif %}
+                    {{ form.password.label() }}
                     <br>
                 </div> 
                 <div class="custom-control custom-switch">
