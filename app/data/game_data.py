@@ -110,7 +110,7 @@ class GameData():
         Args:
             id_to_add (int/str): Id to add to the list
         """
-        self.index['games'].append(str(id_to_add))
+        self.index['games'].append(id_to_add)
         self.saveIndex()
 
     def removeIndex(self, id_to_remove):
