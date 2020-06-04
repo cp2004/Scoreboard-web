@@ -6,7 +6,7 @@ from flask_moment import Moment
 from config import Config
 
 from app.game.session_manager import Session_Manager
-from app.data.game_data import GameData
+from app.data import GameData
 try:
     from app.matrix.graphics import InitMatrix
     IS_RPI = True
