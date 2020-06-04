@@ -39,16 +39,30 @@ index.json
 
 
 class GameData():
+    """Managing game saving and indexing
+    """
     def __init__(self, app=None):
+        """Initialise
+
+        Args:
+            app (Flask, optional): Passed to DataManager for config. Defaults to None.
+        """
         if app:
             self.data_manager = DataManager(app)
             self.checkIndex()
 
     def init_app(self, app):
+        """Add app instance and generate manager. Must have a datamanger for rest of functions.
+
+        Args:
+            app ([type]): [description]
+        """
         self.data_manager = DataManager(app)
         self.checkIndex()
 
     def checkIndex(self):
+        """Checks if indexes exist, if not create them.
+        """
         if self.data_manager.file_exists('index'):
             self.index = self.data_manager.readFile('index')
         else:
@@ -72,34 +86,68 @@ class GameData():
     #################
 
     def getIndex(self):
+        """Method to return game index
+
+        Returns:
+            dict: Index of all games
+        """
         return self.index
 
     def getLast_Index(self):
+        """Find last index in dict
+
+        Returns:
+            str: id of last game
+        """
         if self.index['games']:
             return self.index['games'][-1]
         else:
             return 0
 
     def addIndex(self, id_to_add):
-        self.index['games'].append(id_to_add)
+        """Add an id to the index
+
+        Args:
+            id_to_add (int/str): Id to add to the list
+        """
+        self.index['games'].append(str(id_to_add))
         self.saveIndex()
 
     def removeIndex(self, id_to_remove):
+        """Remove an id from the index
+
+        Args:
+            id_to_remove (int/str): Id to remove from list
+        """
         self.index['games'].remove(int(id_to_remove))
         self.saveIndex()
 
     def saveIndex(self):
+        """Save index to disk
+        """
         self.data_manager.writeFile('index', self.index)
 
     def addIndex_user(self, id_to_add):
+        """Add a user to the index
+
+        Args:
+            id_to_add (int/str): Id to add to users index
+        """
         self.users['users'].append(id_to_add)
         self.data_manager.writeFile('index', self.users, dir='users')
 
     def removeIndex_user(self, id_to_remove):
+        """Remove a user from index
+
+        Args:
+            id_to_remove (int/str): Id to remove from users index
+        """
         self.users['users'].remove(int(id_to_remove))
         self.saveIndex()
 
     def saveIndex_users(self):
+        """Write users index to file
+        """
         self.data_manager.writeFile('users', self.users, dir='users')
 
     ################
@@ -107,6 +155,15 @@ class GameData():
     ################
 
     def saveGame(self, id, player1_id, player2_id, player1_score, player2_score):
+        """Save a game to disk
+
+        Args:
+            id (int): id of game
+            player1_id (int): Id of player 1
+            player2_id (int): Id of player 2
+            player1_score (int): Score of player 1
+            player2_score (int): Score of player 2
+        """
         game = {
             'id': id,
             'player1': {
@@ -129,14 +186,33 @@ class GameData():
         self.addIndex(id)
 
     def addGame_user(self, user_id, game_id):
+        """Add game to user's file
+
+        Args:
+            user_id (int): Id of user
+            game_id (int): Id of game to add
+        """
         user = self.data_manager.readFile(user_id, dir='users')
         user['games'].append(game_id)
         self.data_manager.writeFile(user_id, user, dir='users')
 
     def loadGame(self, id):
+        """Load a game from the disk
+
+        Args:
+            id (int): Id of game to load
+
+        Returns:
+            dict: Data of game (Score, players, winner)
+        """
         return self.data_manager.readFile(id, dir='games')
 
     def deletegame(self, id):
+        """Removes a game from disk, and indexes
+
+        Args:
+            id (int): Id of game to remove
+        """
         game = self.loadGame(id)
 
         # remove game from users
@@ -158,6 +234,11 @@ class GameData():
     ################
 
     def newUser(self, user_id):
+        """Add a new user to the index
+
+        Args:
+            user_id (int): Id of user (Should link with sql db)
+        """
         user = {
             'id': user_id,
             'games': []
@@ -166,4 +247,12 @@ class GameData():
         self.addIndex_user(user_id)
 
     def loadUser(self, id):
+        """Loads a users file from disk
+
+        Args:
+            id (int): Id of user
+
+        Returns:
+            dict: data of user
+        """
         return self.data_manager.readFile(id, dir='users')
