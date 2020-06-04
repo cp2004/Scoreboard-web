@@ -22,6 +22,12 @@
             <div class="col-md-6 text-center">
                 {% if user.stats %}
                     {% include 'main/stats-user.html' %}
+                {% else %}
+                {% if current_user.id == user.id %}
+                You haven't played a game yet. Go do it!
+                {% else %}
+                This user hasn't played a game yet. Make them!
+                {% endif %}
                 {% endif %}
             </div>
         </div>
