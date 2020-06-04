@@ -20,7 +20,9 @@
                 </div>
             </div>
             <div class="col-md-6 text-center">
-                <p>List number of wins-losses here?</p>
+                {% if user.stats %}
+                    {% include 'main/stats-user.html' %}
+                {% endif %}
             </div>
         </div>
     </div>
