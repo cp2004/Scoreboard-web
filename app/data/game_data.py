@@ -26,7 +26,10 @@ game save file:
         },
         'winner':None
     }
-
+[users]id.json
+    {
+        games = [ids of games user is in]
+    }
 index.json
     {
         games: [ids of game]
