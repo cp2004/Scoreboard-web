@@ -12,3 +12,4 @@ TestData
 *.db
 *.sock
 *.ini
+*.code-workspace
