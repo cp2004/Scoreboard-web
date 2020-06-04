@@ -1,3 +1,4 @@
+from collections import Counter
 from app import db, game_data
 from app.models import Stats
 
@@ -25,6 +26,7 @@ class UserStats():
         games = game_data.loadUser(self.user.id)['games']
         games_played = len(games)
         games_won = total_points = total_points_against = 0
+        users_played = []
         for game_id in games:
             game = game_data.loadGame(game_id)
             if int(game['winner']) == self.user.id:
@@ -33,11 +35,16 @@ class UserStats():
                 # If player is P1
                 total_points += game['player1']['score']
                 total_points_against += game['player2']['score']
+                users_played.append(int(game['player2']['id']))
 
             if int(game['player2']['id']) == self.user.id:
                 # If player is P2
                 total_points += game['player2']['score']
                 total_points_against += game['player1']['score']
+                users_played.append(int(game['player2']['id']))
+
+        most_played, games_against_most_played = Counter(users_played).most_common(1)[0]
+
         # compute averages
         avg_points = round(total_points / games_played, 1)
         avg_points_against = round(total_points_against / games_played, 1)
@@ -50,6 +57,8 @@ class UserStats():
             self.user.stats.total_points_against = total_points_against
             self.user.stats.avg_points = avg_points
             self.user.stats.avg_points_against = avg_points_against
+            self.user.stats.most_played = most_played
+            self.user.stats.games_against_most_played = games_against_most_played
         else:
             user_stats = Stats(
                 user_id=self.user.id,
@@ -58,7 +67,9 @@ class UserStats():
                 total_points=total_points,
                 total_points_against=total_points_against,
                 avg_points=avg_points,
-                avg_points_against=avg_points_against
+                avg_points_against=avg_points_against,
+                most_played=most_played,
+                games_against_most_played=games_against_most_played
             )
             db.session.add(user_stats)
         db.session.commit()

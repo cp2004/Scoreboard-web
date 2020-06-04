@@ -4,5 +4,7 @@
     Total Points: {{ user.stats.total_points }}<br>
     Total Points against: {{ user.stats.total_points_against }}<br>
     Average points: {{ user.stats.avg_points }}<br>
-    Average points against: {{ user.stats.avg_points_against }}
+    Average points against: {{ user.stats.avg_points_against }}<br>
+    Most played user: {{ User.query.get(user.stats.most_played).username }}
+    (played {{ user.stats.games_against_most_played }} times)
 </p>

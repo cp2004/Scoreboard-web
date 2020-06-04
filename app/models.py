@@ -43,6 +43,8 @@ class Stats(db.Model):
     total_points_against = db.Column(db.Integer)
     avg_points = db.Column(db.Integer)
     avg_points_against = db.Column(db.Integer)
+    most_played = db.Column(db.Integer)
+    games_against_most_played = db.Column(db.Integer)
 
 
 @login.user_loader
