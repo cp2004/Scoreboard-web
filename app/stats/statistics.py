@@ -39,8 +39,8 @@ class UserStats():
                 total_points += game['player2']['score']
                 total_points_against += game['player1']['score']
         # compute averages
-        avg_points = total_points / games_played
-        avg_points_against = total_points_against / games_played
+        avg_points = round(total_points / games_played, 1)
+        avg_points_against = round(total_points_against / games_played, 1)
 
         # Save to db
         if self.user.stats:
