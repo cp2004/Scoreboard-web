@@ -12,7 +12,8 @@ class User(UserMixin, db.Model):
     password_hash = db.Column(db.String(128))
     about_me = db.Column(db.String(140))
     initial = db.Column(db.String(2))
-    last_seen = db.Column(db.DateTime, default=datetime.utcnow)
+    last_seen = db.Column(db.DateTime, default=datetime.utcnow)  # Could move to stats - Currently unused
+    stats = db.relationship("Stats", uselist=False, back_populates="user")
 
     def __repr__(self):
         return '<User {}>'.format(self.username)
@@ -29,6 +30,19 @@ class User(UserMixin, db.Model):
             return 'https://www.gravatar.com/avatar/{}?d=identicon&s={}'.format(digest, size)
         else:
             return '/static/no_email.svg'
+
+
+class Stats(db.Model):
+    id = db.Column(db.Integer, primary_key=True)
+    user_id = db.Column(db.Integer, db.ForeignKey('user.id'))
+    user = db.relationship("User", back_populates="stats")
+
+    games_played = db.Column(db.Integer)
+    games_won = db.Column(db.Integer)
+    total_points = db.Column(db.Integer)
+    total_points_against = db.Column(db.Integer)
+    avg_points = db.Column(db.Integer)
+    avg_points_against = db.Column(db.Integer)
 
 
 @login.user_loader

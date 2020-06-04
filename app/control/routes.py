@@ -8,6 +8,7 @@ from app.game.game import Game as ttGame
 from flask import url_for, render_template, request, redirect, flash
 from flask_login import login_required
 from app.models import User
+from app.stats.statistics import UserStats, GlobalStats
 import threading
 
 
@@ -112,7 +113,10 @@ def save_game():
                        game.getScore(game.player1),
                        game.getScore(game.player2),
                        )
-
+    player1_stats = UserStats(User.query.get(game.player1.user))
+    player2_stats = UserStats(User.query.get(game.player1.user))
+    player1_stats.update_stats()
+    player2_stats.update_stats()
     session.endSession()
     flash('Game saved', category='success')
     return redirect(url_for('main.index'))
