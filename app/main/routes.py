@@ -69,15 +69,3 @@ def delete_game(id):
 @login_required
 def feature_list():
     return render_template('main/feature_list.html')
-
-@bp.route('/delete_user/<id>')
-@login_required
-def delete_user(id):
-    user = User.query.get(id)
-    if current_user.id == user.id:
-        logout_user()
-        db.session.delete(user)
-        db.session.commit()
-        return redirect(url_for('auth.login'))
-    else:
-        return redirect(url_for('main.index'))
