@@ -34,15 +34,16 @@ class UserStats():
         if counted:
             most_played, games_against_most_played = counted[0]
         else:
-            most_played = "None"
+            most_played = None
             games_against_most_played = 0
 
         # compute averages
         if games_played:  # Don't compute if no games (ZeroDivisionError)
             avg_points = round(total_points / games_played, 1)
             avg_points_against = round(total_points_against / games_played, 1)
+            win_ratio = round(games_won / games_played, 2)
         else:
-            avg_points = avg_points_against = 0
+            avg_points = avg_points_against = win_ratio = 0
 
         # Save to db
         if self.user.stats:
@@ -54,6 +55,7 @@ class UserStats():
             self.user.stats.avg_points_against = avg_points_against
             self.user.stats.most_played = most_played
             self.user.stats.games_against_most_played = games_against_most_played
+            self.user.stats.win_ratio = win_ratio
         else:
             user_stats = Stats(
                 user_id=self.user.id,
@@ -64,7 +66,8 @@ class UserStats():
                 avg_points=avg_points,
                 avg_points_against=avg_points_against,
                 most_played=most_played,
-                games_against_most_played=games_against_most_played
+                games_against_most_played=games_against_most_played,
+                win_ratio=win_ratio
             )
             db.session.add(user_stats)
         db.session.commit()
