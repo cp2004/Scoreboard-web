@@ -43,11 +43,19 @@ class UserStats():
                 total_points_against += game['player1']['score']
                 users_played.append(int(game['player1']['id']))
 
-        most_played, games_against_most_played = Counter(users_played).most_common(1)[0]
+        counted = Counter(users_played).most_common(1)
+        if counted:
+            most_played, games_against_most_played = counted[0]
+        else:
+            most_played = "None"
+            games_against_most_played = 0
 
         # compute averages
-        avg_points = round(total_points / games_played, 1)
-        avg_points_against = round(total_points_against / games_played, 1)
+        if games_played:  # Don't compute if no games (ZeroDivisionError)
+            avg_points = round(total_points / games_played, 1)
+            avg_points_against = round(total_points_against / games_played, 1)
+        else:
+            avg_points = avg_points_against = 0
 
         # Save to db
         if self.user.stats:
