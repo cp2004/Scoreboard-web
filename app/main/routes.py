@@ -1,7 +1,7 @@
 from app import db, session, game_data
 from app.main import bp
 from flask import url_for, render_template, request, redirect, flash
-from flask_login import current_user, login_required
+from flask_login import current_user, login_required, logout_user
 from app.models import User
 from app.main.forms import EditProfileForm
 from app.stats.statistics import UserStats
@@ -69,3 +69,13 @@ def delete_game(id):
 @login_required
 def feature_list():
     return render_template('main/feature_list.html')
+
+@bp.route('/delete_user/<id>')
+@login_required
+def delete_user(id):
+    user = User.query.get(id)
+    logout_user()
+    if current_user.id == user.id:
+        db.session.delete(user)
+        db.session.commit()
+    return redirect('auth.login')
