@@ -8,7 +8,7 @@ from app.game.game import Game as ttGame
 from flask import url_for, render_template, request, redirect, flash
 from flask_login import login_required
 from app.models import User
-from app.stats.statistics import UserStats, GlobalStats
+from app.stats.statistics import UserStats
 import threading
 
 
