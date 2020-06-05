@@ -56,10 +56,11 @@ def edit_profile():
 @login_required
 def delete_game(id):
     game = game_data.loadGame(id)
-    if current_user.id == int(game['player1']['id']) or current_user.id == int(game['player2']['id']):  # Check if user is in the game
-        game_data.deletegame(id)
-        UserStats(User.query.get(int(game['player1']['id']))).update_stats()
-        UserStats(User.query.get(int(game['player1']['id']))).update_stats()
+    if game:
+        if current_user.id == int(game['player1']['id']) or current_user.id == int(game['player2']['id']):  # Check if user is in the game
+            game_data.deletegame(id)
+            UserStats(User.query.get(int(game['player1']['id']))).update_stats()
+            UserStats(User.query.get(int(game['player1']['id']))).update_stats()
     # Redirect to previous page?
     return redirect(url_for('main.index'))
 
