@@ -1,12 +1,84 @@
-<p>
-    Games Played: {{ user.stats.games_played }}<br>
-    Games Won: {{ user.stats.games_won }}<br>
-    Total Points: {{ user.stats.total_points }}<br>
-    Total Points against: {{ user.stats.total_points_against }}<br>
-    Average points: {{ user.stats.avg_points }}<br>
-    Average points against: {{ user.stats.avg_points_against }}<br>
+<div class="row">
+    <div class="col-sm-6 p-1 text-center">
+        <div class="card shadow-sm rounded">
+            <div>
+                <h3 class="display-4">{{ user.stats.games_played }}</h3>
+                <span>Games</span>
+            </div>
+            <div class="card-content">
+                <ul class="list-inline clearfix">
+                    <li class="border-right border-success pr-2 list-inline-item">
+                        <h1 class="text-success">{{ user.stats.games_won }}</h1>
+                        <span><i class="fas fa-trophy fa text-success"></i> Wins</span>
+                    </li>
+                    <li class="border-left border-danger pl-2 list-inline-item">
+                        <h1 class="text-danger">{{ user.stats.games_played - user.stats.games_won }}</h1>
+                        <span>Losses <i class="fas fa-times text-danger"></i></span>
+                    </li>
+                </ul>
+            </div>
+            <div class="card-content">
+                <h1>{{ user.stats.win_ratio * 100 }}%</h3>
+                <span>Win ratio</span>
+            </div>
+            <div class="card-content">
+                <div class="progress mt-0 mb-0" style="height: 1rem;">
+                    <div class="progress-bar bg-success" role="progressbar" style="width: {{ user.stats.win_ratio * 100 }}%" aria-valuenow="{{ user.stats.win_ratio * 100 }}" aria-valuemin="0" aria-valuemax="100"></div>
+                    <div class="progress-bar bg-danger" role="progressbar" style="width: {{ 100 - (user.stats.win_ratio * 100) }}%" aria-valuenow="{{ 100 - (user.stats.win_ratio * 100) }}" aria-valuemin="0" aria-valuemax="100"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="col-sm-6 p-1 text-center">
+        <div class="card shadow-sm rounded">
+            <div>
+                <h3 class="display-4">{{ user.stats.total_points + user.stats.total_points_against }}</h3>
+                <span>Points played</span>
+            </div>
+            <div class="card-content">
+                <ul class="list-inline clearfix">
+                    <li class="border-right border-success pr-2 list-inline-item">
+                        <h1 class="text-success">{{ user.stats.total_points }}</h1>
+                        <span><i class="fas fa-check text-success"></i> For</span>
+                    </li>
+                    <li class="border-left border-danger pl-2 list-inline-item">
+                        <h1 class="text-danger">{{ user.stats.total_points_against }}</h1>
+                        <span>Against <i class="fas fa-times text-danger"></i></span>
+                    </li>
+                </ul>
+            </div>
+            <div class="card-content">
+                <ul class="list-inline clearfix">
+                    <li class="border-right border-success pr-2 list-inline-item">
+                        <h1 class="text-success">{{ user.stats.avg_points }}</h1>
+                        <span><i class="fas fa-check text-success"></i> Avg For</span>
+                    </li>
+                    <li class="border-left border-danger pl-2 list-inline-item">
+                        <h1 class="text-danger">{{ user.stats.avg_points_against }}</h1>
+                        <span> Avg Against <i class="fas fa-times text-danger"></i></span>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </div>
     {% if user.stats.most_played %}
-    Most played user: {{ User.query.get(user.stats.most_played).username }}
-    (played {{ user.stats.games_against_most_played }} times)
+    <div class="col-sm-12  p-1 text-center">
+        <div class="card shadow-sm rounded">
+            <div>
+                <h3 class="display-4">{{ User.query.get(user.stats.most_played).username }}</h3>
+                <span>Most Played User</span>
+            </div>
+            <div class="card-content">
+                {% if user.stats.games_against_most_played == 1 %}
+                {% set games_against_player = "Once" %}
+                {% elif user.stats.games_against_most_played == 2 %}
+                {% set games_against_player = "Twice" %}
+                {% else %}
+                {% set games_against_player = str(user.stats.games_against_most_played) + " Times" %}
+                {% endif %}
+                <h1>Played {{ games_against_player }}</h1>
+            </div>
+        </div>
+    </div>
     {% endif %}
-</p>
+</div>

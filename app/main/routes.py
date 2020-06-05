@@ -27,7 +27,7 @@ def user(username):
     user = User.query.filter_by(username=username).first_or_404()
     games = game_data.loadUser(user.id)
 
-    return render_template('main/user.html', user=user, reversed=reversed, title=user.username, games=games, game_data=game_data, User=User)
+    return render_template('main/user.html',str=str, user=user, reversed=reversed, title=user.username, games=games, game_data=game_data, User=User)
 
 
 @bp.route('/edit-profile', methods=['GET', 'POST'])
