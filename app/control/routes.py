@@ -109,19 +109,20 @@ class WinnerData():
 @bp.route('/game/save')
 @login_required
 def save_game():
-    game = session.getSession()
-    game_data.saveGame(session.getSessionId(),
-                       game.player1.user,
-                       game.player2.user,
-                       game.getScore(game.player1),
-                       game.getScore(game.player2),
-                       )
-    player1_stats = UserStats(User.query.get(game.player1.user))
-    player2_stats = UserStats(User.query.get(game.player2.user))
-    player1_stats.update_stats()
-    player2_stats.update_stats()
-    session.endSession()
-    flash('Game saved', category='success')
+    if session.is_active():
+        game = session.getSession()
+        game_data.saveGame(session.getSessionId(),
+                        game.player1.user,
+                        game.player2.user,
+                        game.getScore(game.player1),
+                        game.getScore(game.player2),
+                        )
+        player1_stats = UserStats(User.query.get(game.player1.user))
+        player2_stats = UserStats(User.query.get(game.player2.user))
+        player1_stats.update_stats()
+        player2_stats.update_stats()
+        session.endSession()
+        flash('Game saved', category='success')
     return redirect(url_for('main.index'))
 
 
