@@ -3,19 +3,6 @@ from app import db, game_data
 from app.models import Stats
 
 
-class GlobalStats():
-    def __init__(self):
-        pass
-
-    def update_stats(self):
-        # Update statistics - run every game/user creation
-        pass
-
-    def get_stats(self):
-        # Get statistics
-        pass
-
-
 class UserStats():
     def __init__(self, User):
         self.user = User
