@@ -21,6 +21,9 @@
         getAjax(url, updateScore);
     }
     function updateScore(xhttp) {
+        if (xhttp.responseText == "nogame"){
+            window.location.replace("{{ url_for('main.index') }}");
+        }
         document.getElementById("scoreboard").innerHTML = xhttp.responseText;
     }
 

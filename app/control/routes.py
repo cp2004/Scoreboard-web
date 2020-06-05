@@ -51,6 +51,9 @@ def game(gameid):
 
 @bp.route('/game/data/scoreboard', methods=['GET', 'POST'])
 def scoreboard():
+    if not session.is_active():
+        flash("That game no longer exists", 'error')
+        return "nogame"
     game = session.getSession()
     if request.method == 'POST':
         data = request.json
