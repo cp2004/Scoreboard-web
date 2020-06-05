@@ -4,6 +4,7 @@ from flask import url_for, render_template, request, redirect, flash
 from flask_login import current_user, login_required
 from app.models import User
 from app.main.forms import EditProfileForm
+from app.stats.statistics import UserStats
 
 
 @bp.route('/')
@@ -55,8 +56,10 @@ def edit_profile():
 @login_required
 def delete_game(id):
     game = game_data.loadGame(id)
-    if current_user.id == int(game['player1']['id']) or current_user.id == int(game['player2']['id']):
+    if current_user.id == int(game['player1']['id']) or current_user.id == int(game['player2']['id']):  # Check if user is in the game
         game_data.deletegame(id)
+        UserStats(User.query.get(int(game['player1']['id']))).update_stats()
+        UserStats(User.query.get(int(game['player1']['id']))).update_stats()
     # Redirect to previous page?
     return redirect(url_for('main.index'))
 

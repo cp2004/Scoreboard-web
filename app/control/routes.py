@@ -117,10 +117,8 @@ def save_game():
                         game.getScore(game.player1),
                         game.getScore(game.player2),
                         )
-        player1_stats = UserStats(User.query.get(game.player1.user))
-        player2_stats = UserStats(User.query.get(game.player2.user))
-        player1_stats.update_stats()
-        player2_stats.update_stats()
+        UserStats(User.query.get(game.player1.user)).update_stats()
+        UserStats(User.query.get(game.player2.user)).update_stats()
         session.endSession()
         flash('Game saved', category='success')
     return redirect(url_for('main.index'))
