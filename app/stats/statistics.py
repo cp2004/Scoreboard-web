@@ -41,7 +41,7 @@ class UserStats():
                 # If player is P2
                 total_points += game['player2']['score']
                 total_points_against += game['player1']['score']
-                users_played.append(int(game['player2']['id']))
+                users_played.append(int(game['player1']['id']))
 
         most_played, games_against_most_played = Counter(users_played).most_common(1)[0]
 
