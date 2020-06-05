@@ -74,8 +74,10 @@ def feature_list():
 @login_required
 def delete_user(id):
     user = User.query.get(id)
-    logout_user()
     if current_user.id == user.id:
+        logout_user()
         db.session.delete(user)
         db.session.commit()
-    return redirect('auth.login')
+        return redirect(url_for('auth.login'))
+    else:
+        return redirect(url_for('main.index'))
