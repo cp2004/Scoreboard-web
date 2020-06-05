@@ -1,0 +1,44 @@
+<!--Table-->
+<div class="table-responsive">
+    <table id="statsTable" class="table table-hover">
+        <!--Table head-->
+          <thead>
+                <tr>
+                    <th>#</th>
+                    <th>Username</th>
+                    <th>Played</th>
+                    <th>Wins</th>
+                    <th>Points for</th>
+                    <th>Points against</th>
+                    <th>PPG</th>
+                </tr>
+          </thead>
+          <!--Table head-->
+          <!--Table body-->
+          <tbody>
+                {% for user in allusers %}
+                <tr>
+                    <th scope="row">{{ user.id }}</th>
+                    <td>{{ user.username }}</td>
+                    <td>{{ user.stats.games_played }}</td>
+                    <td>{{ user.stats.games_won }}</td>
+                    <td>{{ user.stats.total_points }}</td>
+                    <td>{{ user.stats.total_points_against }}</td>
+                    <td>{{ user.stats.avg_points }}</td>
+                </tr>
+                {% endfor %}
+          </tbody>
+          <!--Table body-->
+    </table>
+    <!--Table-->
+    <script>
+    $(document).ready( function () {
+        $('#statsTable').DataTable( {
+            "paging": false,
+            "info": false,
+            "searching": false,
+            "order":[[3, 'desc']],
+        });
+    } );
+    </script>    
+</div>
