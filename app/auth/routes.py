@@ -1,4 +1,4 @@
-from flask import render_template, redirect, url_for, flash, request
+from flask import render_template, redirect, url_for, flash, request, current_app
 from werkzeug.urls import url_parse
 from flask_login import login_user, logout_user, current_user
 from app import db, game_data
@@ -9,6 +9,7 @@ from app.models import User
 
 @bp.route('/login', methods=['GET', 'POST'])
 def login():
+    current_app.logger.info(f"{request.method} Request for login from IP {request.remote_addr} ")
     if current_user.is_authenticated:
         return redirect(url_for('main.index'))
     form = LoginForm()
@@ -27,12 +28,14 @@ def login():
 
 @bp.route('/logout')
 def logout():
+    current_app.logger.info(f"{request.method} Request for logout from IP {request.remote_addr} ")
     logout_user()
     return redirect(url_for('main.index'))
 
 
 @bp.route('/register', methods=['GET', 'POST'])
 def register():
+    current_app.logger.info(f"{request.method} Request for register from IP {request.remote_addr} ")
     if current_user.is_authenticated:
         return redirect(url_for('main.index'))
     form = RegistrationForm()

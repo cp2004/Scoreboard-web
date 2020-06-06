@@ -1,7 +1,7 @@
 from app import db, session, game_data
 from app.main import bp
-from flask import url_for, render_template, request, redirect, flash
-from flask_login import current_user, login_required, logout_user
+from flask import current_app, url_for, render_template, request, redirect, flash
+from flask_login import current_user, login_required
 from app.models import User
 from app.main.forms import EditProfileForm
 from app.stats.statistics import UserStats
@@ -11,6 +11,7 @@ from app.stats.statistics import UserStats
 @bp.route('/index')
 @login_required
 def index():
+    current_app.logger.info(f"{request.method} Request for index from user { current_user.username } IP {request.remote_addr} ")
     if session.is_active():
         currentSession = session.getSessionId()
     else:
@@ -24,15 +25,17 @@ def index():
 @bp.route('/user/<username>')
 @login_required
 def user(username):
+    current_app.logger.info(f"{request.method} Request for user profile from user { current_user.username } IP {request.remote_addr} ")
     user = User.query.filter_by(username=username).first_or_404()
     games = game_data.loadUser(user.id)
 
-    return render_template('main/user.html',str=str, user=user, reversed=reversed, title=user.username, games=games, game_data=game_data, User=User)
+    return render_template('main/user.html', str=str, user=user, reversed=reversed, title=user.username, games=games, game_data=game_data, User=User)
 
 
 @bp.route('/edit-profile', methods=['GET', 'POST'])
 @login_required
 def edit_profile():
+    current_app.logger.info(f"{request.method} Request for edit profile from user { current_user.username } IP {request.remote_addr} ")
     form = EditProfileForm(current_user.username)
     if form.validate_on_submit():
         current_user.username = form.username.data
@@ -55,6 +58,7 @@ def edit_profile():
 @bp.route('/delete/<id>')
 @login_required
 def delete_game(id):
+    current_app.logger.info(f"{request.method} Request for delete_game from user { current_user.username } IP {request.remote_addr} ")
     game = game_data.loadGame(id)
     if game:
         if current_user.id == int(game['player1']['id']) or current_user.id == int(game['player2']['id']):  # Check if user is in the game
@@ -68,4 +72,5 @@ def delete_game(id):
 @bp.route('/list')
 @login_required
 def feature_list():
+    current_app.logger.info(f"{request.method} Request for list from user { current_user.username } IP {request.remote_addr} ")
     return render_template('main/feature_list.html')

@@ -5,8 +5,8 @@ if IS_RPI:
 from app.control import bp
 from app.control.forms import NewGame_form
 from app.game.game import Game as ttGame
-from flask import url_for, render_template, request, redirect, flash
-from flask_login import login_required
+from flask import current_app, url_for, render_template, request, redirect, flash
+from flask_login import login_required, current_user
 from app.models import User
 from app.stats.statistics import UserStats
 import threading
@@ -15,6 +15,7 @@ import threading
 @bp.route('/game/new', methods=['GET', 'POST'])
 @login_required
 def new_game():
+    current_app.logger.info(f"{request.method} Request for new_game from user {current_user.username}IP {request.remote_addr} ")
     form = NewGame_form()
     users = User.query.all()
     form.player1.choices = [(user.id, user.username) for user in users]
@@ -39,6 +40,7 @@ def new_game():
 @bp.route('/game/<gameid>')
 @login_required
 def game(gameid):
+    current_app.logger.info(f"{request.method} Request for game from user { current_user.username } IP {request.remote_addr} ")
     currentId = session.getSessionId()
     if int(gameid) != currentId:
         return redirect(url_for('main.index'))
@@ -50,7 +52,9 @@ def game(gameid):
 
 
 @bp.route('/game/data/scoreboard', methods=['GET', 'POST'])
+@login_required
 def scoreboard():
+    current_app.logger.info(f"{request.method} Request for scoreboard from user { current_user.username } IP {request.remote_addr} ")
     if not session.is_active():
         flash("That game no longer exists", 'error')
         return "nogame"
@@ -109,14 +113,15 @@ class WinnerData():
 @bp.route('/game/save')
 @login_required
 def save_game():
+    current_app.logger.info(f"{request.method} Request for save_game from user { current_user.username } IP {request.remote_addr} ")
     if session.is_active():
         game = session.getSession()
         game_data.saveGame(session.getSessionId(),
-                        game.player1.user,
-                        game.player2.user,
-                        game.getScore(game.player1),
-                        game.getScore(game.player2),
-                        )
+                           game.player1.user,
+                           game.player2.user,
+                           game.getScore(game.player1),
+                           game.getScore(game.player2),
+                           )
         UserStats(User.query.get(game.player1.user)).update_stats()
         UserStats(User.query.get(game.player2.user)).update_stats()
         session.endSession()
@@ -127,6 +132,7 @@ def save_game():
 @bp.route('/game/discard')
 @login_required
 def discard_game():
+    current_app.logger.info(f"{request.method} Request for save_game from user { current_user.username } IP {request.remote_addr} ")
     session.endSession()
     if IS_RPI:
         Clear(matrix_obj)
