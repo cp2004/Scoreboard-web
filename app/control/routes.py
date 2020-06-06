@@ -21,6 +21,7 @@ def new_game():
     form.player1.choices = [(user.id, user.username) for user in users]
     form.player2.choices = [(user.id, user.username) for user in users]
     if form.validate_on_submit():
+        current_app.logger.debug(f"New game form validated from user {current_user.username}")
         if not session.is_active():
             sessionid = game_data.getLast_Index()
             if sessionid:
@@ -30,9 +31,12 @@ def new_game():
                 game.setServe(game.player1)
             else:
                 game.setServe(game.player2)
+            current_app.logger.info(f"Game created: P1:{form.player1.data}, P2{form.player2.data}, first serve:{form.serving.data}")
             session.setSession(game)
+            current_app.logger.info(f"Redirecting to control.game id{session.getSessionId()}")
             return redirect(url_for('control.game', gameid=session.getSessionId()))
         else:
+            current_app.logger.debug("Game session already in progress")
             flash('Game session already created', category='error')
     return render_template('/control/newgame.html', title="New Game", form=form)
 
@@ -43,11 +47,13 @@ def game(gameid):
     current_app.logger.info(f"{request.method} Request for game from user { current_user.username } IP {request.remote_addr} ")
     currentId = session.getSessionId()
     if int(gameid) != currentId:
+        current_app.logger.info(f"Redirecting to main.index, No game session with id {gameid} found")
         return redirect(url_for('main.index'))
     game = session.getSession()
     player1 = User.query.filter_by(id=game.player1.user).first_or_404().username
     player2 = User.query.filter_by(id=game.player2.user).first_or_404().username
     players = {'player1': player1, 'player2': player2}
+    current_app.logger.debug(f"Game view created, players {players}")
     return render_template('control/game.html', title="Game in Progress", players=players)
 
 
