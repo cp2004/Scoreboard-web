@@ -1,4 +1,5 @@
 from flask_wtf import FlaskForm
+from flask import current_app
 from wtforms import StringField, PasswordField, BooleanField, SubmitField
 from wtforms.validators import DataRequired, ValidationError, EqualTo, Length
 from app.models import User
@@ -21,6 +22,8 @@ class RegistrationForm(FlaskForm):
     def validate_username(self, username):
         user = User.query.filter_by(username=username.data).first()
         if user is not None:
+            current_app.logger.info(f"Request for username {user.username} denied, already taken")
             raise ValidationError('Username already taken')
         if ' ' in username.data:
+            current_app.logger.info(f'Request for username {user.username} denied, spaces in name')
             raise ValidationError('No spaces in username please')
