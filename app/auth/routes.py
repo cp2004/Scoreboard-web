@@ -34,7 +34,7 @@ def login():
 def logout():
     current_app.logger.info(f"{request.method} Request for logout from IP {request.remote_addr} ")
     logout_user()
-    current_app.logger.debug(f"User logged out")
+    current_app.logger.debug("User logged out")
     return redirect(url_for('main.index'))
 
 
@@ -55,6 +55,6 @@ def register():
         game_data.newUser(userid)
         current_app.logger.debug(f"New User: id:{userid}, username:{form.username.data}")
         flash('Congratulations, you are now a registered user!', category='success')
-        current_app.logger.info(f"Redirecting to auth.login")
+        current_app.logger.info("Redirecting to auth.login")
         return redirect(url_for('auth.login'))
     return render_template('auth/register.html', title='Register', form=form)
