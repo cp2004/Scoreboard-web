@@ -28,6 +28,7 @@ def user(username):
     current_app.logger.info(f"{request.method} Request for user profile from user { current_user.username } IP {request.remote_addr} ")
     user = User.query.filter_by(username=username).first_or_404()
     games = game_data.loadUser(user.id)
+    current_app.logger.debug(f"Loaded user profile for {user.username}")
 
     return render_template('main/user.html', str=str, user=user, reversed=reversed, title=user.username, games=games, game_data=game_data, User=User)
 
@@ -38,6 +39,7 @@ def edit_profile():
     current_app.logger.info(f"{request.method} Request for edit profile from user { current_user.username } IP {request.remote_addr} ")
     form = EditProfileForm(current_user.username)
     if form.validate_on_submit():
+        current_app.logger.debug(f"Edit profile form validated for user {current_user.username}")
         current_user.username = form.username.data
         current_user.about_me = form.about_me.data
         current_user.initial = form.initial.data
@@ -65,6 +67,12 @@ def delete_game(id):
             game_data.deletegame(id)
             UserStats(User.query.get(int(game['player1']['id']))).update_stats()
             UserStats(User.query.get(int(game['player1']['id']))).update_stats()
+            current_app.logger.debug(f"User {current_user.username} deleted game: {id}")
+        else:
+            current_app.logger.debug(f"User {current_user.username} not allowed to delete game: {id}")
+
+    else:
+        current_app.logger.debug(f"No game at id: {id}")
     # Redirect to previous page?
     return redirect(url_for('main.index'))
 
