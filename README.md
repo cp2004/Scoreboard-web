@@ -26,15 +26,15 @@
 
 ---
 ## Installation
- 1. Clone the repo `git clone https://github.com/cp2004/Scoreboard-web`
+ 1.Clone the repo `git clone https://github.com/cp2004/Scoreboard-web`
 
- 2. Browse the config file config.py, make any changes:
-   - Path to RGB Matrix (If required)
+ 2.Browse the config file config.py, make any changes:
+   -Path to RGB Matrix (If required)
 
- 3. Create a virtual environment if needed (`python -m virtualenv NAME`)
+ 3.Create a virtual environment if needed (`python -m virtualenv NAME`)
 
- 4. Install dependencies `pip install -r requirements.txt`
+ 4.Install dependencies `pip install -r requirements.txt`
 
- 5. Run with `flask run`
+ 5.Run with `flask run`
 
- 6. PLAY!
+ 6.PLAY!
