@@ -4,7 +4,10 @@
     <main role="main">
         <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
             <h1 class="h2">Dashboard</h1>
-            <button type="button" class="btn btn-sm btn-outline-secondary">Download</button>
+            <div class="btn-group">
+                <button onclick="GetLogs()" id="RefreshBtn" type="button" class="btn btn-sm btn-outline-secondary" style="min-width: 5rem;"><i class="fas fa-sync"></i> Refresh</button>
+                <button type="button" class="btn btn-sm btn-outline-secondary" style="min-width: 5rem;"><i class="fas fa-download"></i> Download</button>
+            </div>
         </div>
         <h2>Logs</h2>
         <div class="bg-light border border-dark rounded-lg p-2">

@@ -1,11 +1,26 @@
 <script>
-    var output = document.getElementById('output');
+    document.addEventListener("DOMContentLoaded", GetLogs())
 
-    var xhr = new XMLHttpRequest();
-    xhr.open('GET', '{{ url_for("admin.logs") }}');
-    xhr.send();
+    function GetLogs() {
+        document.getElementById("RefreshBtn").innerHTML = '<i class="fas fa-sync fa-spin"></i> Refresh';
+        var url = "{{ url_for('admin.logs') }}";
+        getAjax(url, UpdateLogs);
+    }
+    
+    function UpdateLogs(xhttp) {
+        document.getElementById("output").innerText = xhttp.responseText;
+        document.getElementById("RefreshBtn").innerHTML = '<i class="fas fa-sync"></i> Refresh';
+    }
 
-    setInterval(function() {
-        output.textContent = xhr.responseText;
-    }, 1000);
+    function getAjax(url, cFunction) {
+        var xhttp;
+        xhttp = new XMLHttpRequest();
+        xhttp.onreadystatechange = function() {
+            if (this.readyState == 4 && this.status ==200) {
+                cFunction(this);
+            }
+        };
+        xhttp.open("GET", url, true);
+        xhttp.send();
+    }
 </script>
