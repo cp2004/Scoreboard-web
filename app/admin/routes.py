@@ -18,10 +18,7 @@ def logs():
 
     def generate():
         with open(log_path) as f:
-            while True:
-                for line in reversed(f.readlines()):
-                    yield line
-                # print(read)
-                sleep(1)
+            for line in reversed(f.readlines()):
+                yield line
 
     return Response(generate(), mimetype='text/plain')
