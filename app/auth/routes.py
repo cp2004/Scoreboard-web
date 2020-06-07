@@ -57,4 +57,4 @@ def register():
         flash('Congratulations, you are now a registered user!', category='success')
         current_app.logger.info("Redirecting to auth.login")
         return redirect(url_for('auth.login'))
-    return render_template('auth/register.html', title='Register', form=form)
+    return render_template('auth/register.html', title='Register', form=form, style='signin')
