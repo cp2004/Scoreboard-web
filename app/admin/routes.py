@@ -1,5 +1,5 @@
 import os
-from flask import current_app, render_template, request, Response
+from flask import current_app, render_template, request, Response, send_from_directory
 from flask_login import current_user, login_required
 from app.admin import bp
 
@@ -22,3 +22,11 @@ def logs():
                 yield line
 
     return Response(generate(), mimetype='text/plain')
+
+
+@bp.route('/admin/download')
+@login_required
+def download_logs():
+    log_dir = os.path.join(current_app.config['BASE_DIRECTORY'], 'logs')
+
+    return send_from_directory(directory=log_dir, filename='tabletennis.log', as_attachment=True)

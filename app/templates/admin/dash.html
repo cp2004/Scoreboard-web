@@ -6,7 +6,7 @@
             <h1 class="h2">Dashboard</h1>
             <div class="btn-group">
                 <button onclick="GetLogs()" id="RefreshBtn" type="button" class="btn btn-sm btn-outline-secondary" style="min-width: 5rem;"><i class="fas fa-sync"></i> Refresh</button>
-                <button type="button" class="btn btn-sm btn-outline-secondary" style="min-width: 5rem;"><i class="fas fa-download"></i> Download</button>
+                <a href="{{ url_for('admin.download_logs') }}" class="btn btn-sm btn-outline-secondary" style="min-width: 5rem;"><i class="fas fa-download"></i> Download</a>
             </div>
         </div>
         <h2>Logs</h2>
