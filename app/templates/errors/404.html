@@ -1,0 +1,15 @@
+{% extends "base.html" %}
+
+{% block content %}
+<div class="jumbotron">
+    <div class="container">
+        <div class="col-md-12">
+            <h1>Not Found</h1>
+            <p>
+                Oops, something went wrong. If you clicked a link, let me know...<br>
+                <a class="btn btn-primary" href="{{ url_for('main.index') }}">Back Home</a>
+            </p>
+        </div>
+    </div>    
+</div>
+{% endblock %}
