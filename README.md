@@ -5,18 +5,18 @@
 
 ---
 ## Features
--  Complete user authentication, with encrypted passwords
--  Table tennis scoreboard (Up to 11 points) with tiebreak and serving indicator
--  Saving games from the scoreboard to track progress
--  Statistics views: User stats as well as a global league table
--  Optional RGB Matrix support
+  -Complete user authentication, with encrypted passwords
+  -Table tennis scoreboard (Up to 11 points) with tiebreak and serving indicator
+   -Saving games from the scoreboard to track progress
+  -Statistics views: User stats as well as a global league table
+  -Optional RGB Matrix support
 
 ---
 ## Credits
--  [Flask](https://flask.palletsprojects.com/en/1.1.x/) Webserver
--  [Bootstrap 4](https://getbootstrap.com/) Site styling
--  [Data Tables](https://datatables.net/) Data table for home page
--  [Fontawesome](https://fontawesome.com/) Icons
+  -[Flask](https://flask.palletsprojects.com/en/1.1.x/) Webserver
+  -[Bootstrap 4](https://getbootstrap.com/) Site styling
+  -[Data Tables](https://datatables.net/) Data table for home page
+  -[Fontawesome](https://fontawesome.com/) Icons
 
 ---
 ## Screenshots
