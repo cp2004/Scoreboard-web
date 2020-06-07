@@ -66,7 +66,7 @@ class GameData():
 
     def checkIndex(self):
         """Checks if indexes exist, if not create them."""
-        
+
         if self.data_manager.file_exists('index'):
             self.index = self.data_manager.readFile('index')
         else:
