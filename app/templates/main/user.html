@@ -5,7 +5,7 @@
     <div class="container">
         <div class="row">
             <div class="col-lg-6">
-                <div class="intro border border-secondary rounded-lg text-center">
+                <div class="intro border border-secondary rounded-lg text-center p-1">
                     <img src="{{ user.avatar(240) }}" class="rounded-pill image-fluid align-center" width="50%" alt="Profile picture">
                     <h2><b>{{ user.username }}</b></h2>
                     {% if user.initial %}
@@ -15,7 +15,7 @@
                     <h4 class="text-secondary">{{ user.about_me }}</h4>
                     {% endif  %}
                     {% if user == current_user %}
-                    <a href="{{ url_for('main.edit_profile') }}" class="btn btn-outline-secondary">Edit</a>
+                    <a href="{{ url_for('main.edit_profile') }}" class="btn btn-outline-secondary"><i class="far fa-edit"></i> Edit</a>
                     {% endif %}
                 </div>
             </div>
