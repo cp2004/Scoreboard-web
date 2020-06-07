@@ -7,7 +7,7 @@
             <img class="image-fluid" src="{{ url_for('static', filename='Bats.svg')}}" alt="Two Table Tennis Bats"  width="100%">
         </div>
         <div class="col-md-6">
-            <form action="" method="post" class="form-signin" novalidate role="form">
+            <form action="" method="post" class="form-signin border border-secondary rounded-lg bg-light" novalidate role="form">
                 {{ form.hidden_tag() }}
                 <h1 class="h3 mb-3 font-weight-normal">Please sign in  <small class="text-muted">New user? <a href="{{ url_for('auth.register') }}" class="btn btn-outline-warning btn-sm">Register</a></small></h1>
                 <div class="form-label-group">
