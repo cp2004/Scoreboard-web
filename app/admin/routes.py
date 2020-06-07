@@ -1,5 +1,4 @@
 import os
-from time import sleep
 from flask import current_app, render_template, request, Response
 from flask_login import current_user, login_required
 from app.admin import bp
@@ -10,6 +9,7 @@ from app.admin import bp
 def dash():
     current_app.logger.info(f"{request.method} Request for dashboard from user {current_user.username} IP {request.remote_addr} ")
     return render_template('admin/dash.html')
+
 
 @bp.route('/admin/logs')
 @login_required
