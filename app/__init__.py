@@ -1,6 +1,7 @@
 import os
 import logging
 from logging.handlers import RotatingFileHandler
+
 from flask import Flask
 from flask_sqlalchemy import SQLAlchemy
 from flask_migrate import Migrate
@@ -39,9 +40,7 @@ def create_app(config_class=Config):
             os.mkdir('logs')
         file_handler = RotatingFileHandler('logs/tabletennis.log',
                                            maxBytes=10240, backupCount=10)
-        file_handler.setFormatter(logging.Formatter(
-            '%(asctime)s %(levelname)s: %(message)s '
-            '[in %(pathname)s:%(lineno)d]'))
+        file_handler.setFormatter(logging.Formatter('%(asctime)s %(levelname)s: %(message)s'))
         file_handler.setLevel(logging.INFO)  # Configure from app?
         app.logger.addHandler(file_handler)
 
@@ -62,6 +61,9 @@ def create_app(config_class=Config):
 
     from app.control import bp as control_bp
     app.register_blueprint(control_bp)
+
+    from app.admin import bp as admin_bp
+    app.register_blueprint(admin_bp)
 
     app.logger.info('Table Tennis app startup Complete')
     return app

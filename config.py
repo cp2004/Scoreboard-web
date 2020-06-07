@@ -8,3 +8,4 @@ class Config(object):
     SQLALCHEMY_TRACK_MODIFICATIONS = False
     # Other variables here:
     DATA_DIRECTORY = 'AppData'
+    BASE_DIRECTORY = basedir
