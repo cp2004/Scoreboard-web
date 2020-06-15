@@ -16,9 +16,11 @@ class CommandRunner():
     def get_command(self, cmd):
         """Looks up user-configured command from dict"""
         try:
+            current_app.logger.info(f"Looking for command {cmd}")
             return self.COMMANDS[cmd]
         except KeyError:
             current_app.logger.error(f"Command '{cmd}' not found'")
+            return None
 
     def run_command_thread(self, command):
         """Runs a command (In a thread) using subprocess
@@ -43,6 +45,7 @@ class CommandRunner():
         Returns:
             str: stdout from command if capture_output is True
         """
+        current_app.logger.info(f"Request for command {command}")
         actual_command = self.get_command(command)
         if actual_command:
             current_app.logger.info(f"Running command for '{command}':'{actual_command}'")
