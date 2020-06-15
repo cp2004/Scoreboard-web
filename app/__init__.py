@@ -7,10 +7,10 @@ from flask_sqlalchemy import SQLAlchemy
 from flask_migrate import Migrate
 from flask_login import LoginManager
 
-
 from config import Config
 from app.game.session_manager import Session_Manager
 from app.data import GameData
+from app.util import CommandRunner
 try:
     from app.matrix.graphics import InitMatrix
     IS_RPI = True
@@ -27,6 +27,7 @@ login.login_message = 'Please log in to access this page'
 
 session = Session_Manager()
 game_data = GameData()
+command_runner = CommandRunner()
 if IS_RPI:
     matrix_obj = InitMatrix()
 
@@ -48,6 +49,7 @@ def create_app(config_class=Config):
         app.logger.info("App startup begun")
 
     game_data.init_app(app)
+    command_runner.init_app(app)
 
     db.init_app(app)
     migrate.init_app(app, db)
@@ -67,6 +69,9 @@ def create_app(config_class=Config):
 
     from app.errors import bp as errors_bp
     app.register_blueprint(errors_bp)
+
+    from app.system import bp as system_bp
+    app.register_blueprint(system_bp)
 
     app.logger.info('Table Tennis app startup Complete')
     return app

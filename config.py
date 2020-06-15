@@ -9,3 +9,7 @@ class Config(object):
     # Other variables here:
     DATA_DIRECTORY = 'AppData'
     BASE_DIRECTORY = basedir
+
+    CMD_SHUTDOWN = 'sudo halt'
+    CMD_RESTART = 'sudo reboot'
+    CMD_RESTART_SERVER = 'sudo service tabletennis restart'
