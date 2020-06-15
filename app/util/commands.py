@@ -51,7 +51,7 @@ class CommandRunner():
         else:
             return None
 
-    def shutdown(self, thread=True):
+    def shutdown(self, thread=False):
         """Run shutdown command"""
         current_app.logger.info("Recieved signal to shutdown")
         if thread:
@@ -59,7 +59,7 @@ class CommandRunner():
         else:
             self.run_command('shutdown', capture_output=False)
 
-    def restart(self, thread=True):
+    def restart(self, thread=False):
         """Run restart command"""
         current_app.logger.info("Recieved signal to restart")
         if thread:
@@ -67,7 +67,7 @@ class CommandRunner():
         else:
             self.run_command('restart', capture_output=False)
 
-    def restart_server(self, thread=True):
+    def restart_server(self, thread=False):
         """Run restart server command"""
         current_app.logger.info("Recieved signal to restart server")
         if thread:
