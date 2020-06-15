@@ -15,7 +15,7 @@ import threading
 @bp.route('/game/new', methods=['GET', 'POST'])
 @login_required
 def new_game():
-    current_app.logger.info(f"{request.method} Request for new_game from user {current_user.username}IP {request.remote_addr} ")
+    current_app.logger.info(f"{request.method} Request for new_game from user {current_user.username} IP {request.remote_addr} ")
     form = NewGame_form()
     users = User.query.all()
     form.player1.choices = [(user.id, user.username) for user in users]
