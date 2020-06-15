@@ -29,9 +29,7 @@ class CommandRunner():
         Returns:
             threading.Thread: Thread that the command is running in
         """
-        actual_command = self.get_command(command)
-        current_app.logger.info(f"Running command for '{command}':'{actual_command}'")
-        cmd_thread = threading.Thread(target=subprocess.run, args=(actual_command,), kwargs={'shell': True, 'capture_output': True})
+        cmd_thread = threading.Thread(target=self.run_command, args=(command,), kwargs={'capture_output': False})
         cmd_thread.start()
         return cmd_thread
 
@@ -45,7 +43,9 @@ class CommandRunner():
             str: stdout from command if capture_output is True
         """
         actual_command = self.get_command(command)
+        current_app.logger.info(f"Running command for '{command}':'{actual_command}'")
         output = subprocess.run(actual_command, shell=True, capture_output=True).stdout
+        current_app.logger.info(f"If still running, heres the output: {output}")
         if capture_output:
             return output
         else:
