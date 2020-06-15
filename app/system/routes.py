@@ -9,7 +9,7 @@ from app import command_runner
 @login_required
 def shutdown_system():
     current_app.logger.info(f"{request.method} Request for shutdown_system from user { current_user.username } IP {request.remote_addr} ")
-    # command_runner.shutdown()
+    command_runner.shutdown()
     return Response(status=204)
 
 
@@ -17,7 +17,7 @@ def shutdown_system():
 @login_required
 def restart_system():
     current_app.logger.info(f"{request.method} Request for restart_system from user { current_user.username } IP {request.remote_addr} ")
-    # command_runner.restart()
+    command_runner.restart()
     return Response(status=204)
 
 
@@ -25,5 +25,5 @@ def restart_system():
 @login_required
 def restart_server():
     current_app.logger.info(f"{request.method} Request for restart_server from user { current_user.username } IP {request.remote_addr} ")
-    # command_runner.restart_server()
+    command_runner.restart_server()
     return Response(status=204)
