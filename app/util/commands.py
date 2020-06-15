@@ -11,7 +11,7 @@ class CommandRunner():
             'restart': app.config['CMD_RESTART'],
             'restart_serve': app.config['CMD_RESTART_SERVER']
         }
-        current_app.logger.info(f"Currently configured commands are: {self.COMMANDS}")
+        app.logger.info(f"Currently configured commands are: {self.COMMANDS}")
 
     def get_command(self, cmd):
         """Looks up user-configured command from dict"""
