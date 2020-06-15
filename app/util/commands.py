@@ -11,6 +11,7 @@ class CommandRunner():
             'restart': app.config['CMD_RESTART'],
             'restart_serve': app.config['CMD_RESTART_SERVER']
         }
+        current_app.logger.info(f"Currently configured commands are: {self.COMMANDS}")
 
     def get_command(self, cmd):
         """Looks up user-configured command from dict"""
@@ -43,13 +44,16 @@ class CommandRunner():
             str: stdout from command if capture_output is True
         """
         actual_command = self.get_command(command)
-        current_app.logger.info(f"Running command for '{command}':'{actual_command}'")
-        output = subprocess.run(actual_command, shell=True, capture_output=True).stdout
-        current_app.logger.info(f"If still running, heres the output: {output}")
-        if capture_output:
-            return output
+        if actual_command:
+            current_app.logger.info(f"Running command for '{command}':'{actual_command}'")
+            output = subprocess.run(actual_command, shell=True, capture_output=True).stdout
+            current_app.logger.info(f"If still running, heres the output: {output}")
+            if capture_output:
+                return output
+            else:
+                return None
         else:
-            return None
+            current_app.logger.warning(f"Could not find command for '{command}'")
 
     def shutdown(self, thread=False):
         """Run shutdown command"""
