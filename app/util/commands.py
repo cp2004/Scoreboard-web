@@ -73,4 +73,4 @@ class CommandRunner():
         if thread:
             self.run_command_thread('restart')
         else:
-            self.run_command('restart', capture_output=False)
+            self.run_command('restart_server', capture_output=False)
