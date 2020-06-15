@@ -9,7 +9,7 @@ class CommandRunner():
         self.COMMANDS = {
             'shutdown': app.config['CMD_SHUTDOWN'],
             'restart': app.config['CMD_RESTART'],
-            'restart_serve': app.config['CMD_RESTART_SERVER']
+            'restart_server': app.config['CMD_RESTART_SERVER']
         }
         app.logger.info(f"Currently configured commands are: {self.COMMANDS}")
 
