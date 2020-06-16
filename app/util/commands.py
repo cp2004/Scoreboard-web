@@ -50,8 +50,8 @@ class CommandRunner():
         actual_command = self.get_command(command)
         if actual_command:
             current_app.logger.info(f"Running command for '{command}':'{actual_command}'")
-            output = subprocess.run(actual_command, shell=True, capture_output=True)
-            current_app.logger.info(f"If still running, heres the output: {output.stdout}:{output.stderr}")
+            output = subprocess.run(actual_command, capture_output=True)
+            current_app.logger.info(f"If still running, here's the output: {output.stdout}:{output.stderr}")
             if capture_output:
                 return output
             else:
