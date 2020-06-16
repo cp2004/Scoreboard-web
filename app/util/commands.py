@@ -1,6 +1,6 @@
-import subprocess
 import threading
 
+import sarge
 from flask import current_app
 
 
@@ -49,9 +49,21 @@ class CommandRunner():
         current_app.logger.info(f"Request for command {command}")
         actual_command = self.get_command(command)
         if actual_command:
+            actual_command = actual_command  # .split()
             current_app.logger.info(f"Running command for '{command}':'{actual_command}'")
-            output = subprocess.run(actual_command, capture_output=True)
-            current_app.logger.info(f"If still running, here's the output: {output.stdout}:{output.stderr}")
+            # output = sarge.run(
+            #    actual_command,
+            #    stdout=sarge.Capture(),
+            #    stderr=sarge.Capture(),
+            #    )
+
+            p = sarge.run(actual_command,
+                        stdout=sarge.Capture(),
+                        stderr=sarge.Capture(),
+                        shell=True)
+
+            # output = subprocess.run(actual_command, shell=True, capture_output=True)
+            current_app.logger.info(f"If still running, here's the output: {p.stdout.text}:{p.stderr.text}")
             if capture_output:
                 return output
             else:
