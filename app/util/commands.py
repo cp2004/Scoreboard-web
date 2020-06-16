@@ -65,7 +65,7 @@ class CommandRunner():
             # output = subprocess.run(actual_command, shell=True, capture_output=True)
             current_app.logger.info(f"If still running, here's the output: {p.stdout.text}:{p.stderr.text}")
             if capture_output:
-                return output
+                return p.stdout.text
             else:
                 return None
         else:
