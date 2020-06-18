@@ -1,15 +1,15 @@
 import threading
 
-import sarge
+import subprocess
 from flask import current_app
 
 
 class CommandRunner():
     def init_app(self, app):
         self.COMMANDS = {
-            'shutdown': app.config['CMD_SHUTDOWN'],
-            'restart': app.config['CMD_RESTART'],
-            'restart_server': app.config['CMD_RESTART_SERVER']
+            'shutdown': app.config['CMD_SHUTDOWN'].split(),
+            'restart': app.config['CMD_RESTART'].split(),
+            'restart_server': app.config['CMD_RESTART_SERVER'].split()
         }
         app.logger.info(f"Currently configured commands are: {self.COMMANDS}")
 
@@ -49,23 +49,17 @@ class CommandRunner():
         current_app.logger.info(f"Request for command {command}")
         actual_command = self.get_command(command)
         if actual_command:
-            actual_command = actual_command  # .split()
             current_app.logger.info(f"Running command for '{command}':'{actual_command}'")
-            # output = sarge.run(
-            #    actual_command,
-            #    stdout=sarge.Capture(),
-            #    stderr=sarge.Capture(),
-            #    )
 
-            p = sarge.run(actual_command,
-                        stdout=sarge.Capture(),
-                        stderr=sarge.Capture(),
-                        shell=True)
+            output = subprocess.run(
+                actual_command,
+                capture_output=True,
+                check=True
+            )
 
-            # output = subprocess.run(actual_command, shell=True, capture_output=True)
-            current_app.logger.info(f"If still running, here's the output: {p.stdout.text}:{p.stderr.text}")
+            current_app.logger.info(f"If still running, here's the output: {output.stdout.decode('utf-8')}")
             if capture_output:
-                return p.stdout.text
+                return output.stdout.decode('utf-8')
             else:
                 return None
         else:
