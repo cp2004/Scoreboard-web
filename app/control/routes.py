@@ -88,7 +88,7 @@ def scoreboard():
             winner.against = User.query.filter_by(id=game.player1.user).first_or_404().username
             winner.against_score = game.getScore(game.player1)
         if IS_RPI:
-            if app.current_matrix_thread.is_alive():
+            if app.current_matrix_thread and app.current_matrix_thread.is_alive():
                 matrix_queue.put("KILL")
                 app.current_matrix_thread.join()
             app.current_matrix_thread = threading.Thread(target=WinAnimation, args=(matrix_obj, matrix_queue, winner.name))
