@@ -1,3 +1,8 @@
+import threading
+
+from flask import current_app, url_for, render_template, request, redirect, flash
+from flask_login import login_required, current_user
+
 import app
 from app import session, game_data, IS_RPI, matrix_queue
 if IS_RPI:
@@ -6,11 +11,9 @@ if IS_RPI:
 from app.control import bp
 from app.control.forms import NewGame_form
 from app.game.game import Game as ttGame
-from flask import current_app, url_for, render_template, request, redirect, flash
-from flask_login import login_required, current_user
 from app.models import User
 from app.stats.statistics import UserStats
-import threading
+
 
 
 @bp.route('/game/new', methods=['GET', 'POST'])

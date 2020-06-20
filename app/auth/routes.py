@@ -1,6 +1,8 @@
 from flask import render_template, redirect, url_for, flash, request, current_app
-from werkzeug.urls import url_parse
 from flask_login import login_user, logout_user, current_user
+from werkzeug.urls import url_parse
+
+
 from app import db, game_data
 from app.auth import bp
 from app.auth.forms import LoginForm, RegistrationForm

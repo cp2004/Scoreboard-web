@@ -1,6 +1,7 @@
 import time
 import os
 import sys
+
 from PIL import Image
 sys.path.append('/home/pi/rpi-rgb-led-matrix/bindings/python')  # Should be configurable?
 from rgbmatrix import graphics, RGBMatrix, RGBMatrixOptions

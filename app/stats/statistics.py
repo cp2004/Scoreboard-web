@@ -1,4 +1,5 @@
 from collections import Counter
+
 from app import db, game_data
 from app.models import Stats
 
