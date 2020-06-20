@@ -1,6 +1,7 @@
 import os
 import logging
 from logging.handlers import RotatingFileHandler
+from queue import Queue
 
 from flask import Flask
 from flask_sqlalchemy import SQLAlchemy
@@ -30,6 +31,11 @@ game_data = GameData()
 command_runner = CommandRunner()
 if IS_RPI:
     matrix_obj = InitMatrix()
+
+# Set this to new thread for each animation, so that more than one does not run at once
+current_matrix_thread = None
+# Pass to any threads that need it
+matrix_queue = Queue()
 
 
 def create_app(config_class=Config):

@@ -2,7 +2,7 @@ import time
 import os
 import sys
 from PIL import Image
-sys.path.append('/home/pi/rpi-rgb-led-matrix/bindings/python')
+sys.path.append('/home/pi/rpi-rgb-led-matrix/bindings/python')  # Should be configurable?
 from rgbmatrix import graphics, RGBMatrix, RGBMatrixOptions
 
 
@@ -79,7 +79,7 @@ def Clear(matrix):
     matrix.Clear()
 
 
-def WinAnimation(matrix, name):
+def WinAnimation(matrix, queue, name):
     # Animation celebrating the winner
     # Pulsing brightness
     max_brightness = matrix.brightness
@@ -95,6 +95,11 @@ def WinAnimation(matrix, name):
             matrix.Fill(255, 0, 0)
         elif count % 2 == 1:
             matrix.Fill(0, 255, 0)
+
+        if not queue.empty():
+            queue.get()
+            matrix.Clear()
+            return
         time.sleep(0.004)
 
     # Theaterchase with player text
@@ -119,11 +124,17 @@ def WinAnimation(matrix, name):
             colour = red
 
         graphics.DrawText(matrix, connectFont, xpos, 11, colour, wintxt)
+
+        if not queue.empty():
+            queue.get()
+            matrix.Clear()
+            return
         time.sleep(0.1)
+
         count += 1
         if direction == "left":
             xpos -= 1
-            if (len(wintxt)*6) - 28 == -(xpos - 2):
+            if (len(wintxt) * 6) - 28 == -(xpos - 2):
                 direction = "right"
         else:
             xpos += 1

@@ -1,4 +1,5 @@
-from app import session, game_data, IS_RPI
+import app
+from app import session, game_data, IS_RPI, matrix_queue
 if IS_RPI:
     from app import matrix_obj
     from app.matrix.graphics import Scores, WinAnimation, Clear
@@ -87,8 +88,11 @@ def scoreboard():
             winner.against = User.query.filter_by(id=game.player1.user).first_or_404().username
             winner.against_score = game.getScore(game.player1)
         if IS_RPI:
-            winAnim = threading.Thread(target=WinAnimation, args=(matrix_obj, winner.name,))
-            winAnim.start()
+            if app.current_matrix_thread.is_alive():
+                matrix_queue.put("KILL")
+                app.current_matrix_thread.join()
+            app.current_matrix_thread = threading.Thread(target=WinAnimation, args=(matrix_obj, matrix_queue, winner.name))
+            app.current_matrix_thread.start()
         return render_template('control/win.html', title="Game Won", winner=winner)
 
     else:
@@ -99,6 +103,9 @@ def scoreboard():
         player1_User = User.query.get(game.player1.user)
         player2_User = User.query.get(game.player2.user)
         if IS_RPI:
+            if app.current__matrix_thread and app.current__matrix_thread.is_alive():
+                matrix_queue.put("KILL")
+                app.current__matrix_thread.join()
             Scores(matrix_obj, data.player1_score, data.player2_score, data.serving, player1_User.initial, player2_User.initial)
         return render_template('control/scoreboard.html', data=data, player1_User=player1_User, player2_User=player2_User)
 
