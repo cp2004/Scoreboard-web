@@ -2,14 +2,14 @@
     document.addEventListener("DOMContentLoaded", getScore())
 
     function Score(player, btn) {
-        btn.innerHTML = '<div class="spinner-border" role="status"><span class="sr-only">Loading...</span></div>'
+        btn.parentElement.innerHTML = '<div class="spinner-border" role="status"><span class="sr-only">Loading...</span></div>'
         var url = "/game/data/scoreboard"
         if (player == 1){ var content = {'command':'p1'}}
         else if (player == 2){ var content = {'command':'p2'}}
         postAjax(url, content, updateScore)
     }
     function ScoreSubtract(player, btn) {
-        btn.innerHTML = '<div class="spinner-border" role="status"><span class="sr-only">Loading...</span></div>'
+        btn.parentElement.innerHTML = '<div class="spinner-border" role="status"><span class="sr-only">Loading...</span></div>'
         var url = "/game/data/scoreboard"
         if (player == 1){ var content = {'command':'subp1'}}
         else if (player == 2){var content = {'command':'subp2'}}
