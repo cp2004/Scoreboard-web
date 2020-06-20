@@ -66,7 +66,7 @@ def delete_game(id):
         if current_user.id == int(game['player1']['id']) or current_user.id == int(game['player2']['id']):  # Check if user is in the game
             game_data.deletegame(id)
             UserStats(User.query.get(int(game['player1']['id']))).update_stats()
-            UserStats(User.query.get(int(game['player1']['id']))).update_stats()
+            UserStats(User.query.get(int(game['player2']['id']))).update_stats()
             current_app.logger.debug(f"User {current_user.username} deleted game: {id}")
         else:
             current_app.logger.debug(f"User {current_user.username} not allowed to delete game: {id}")

@@ -9,7 +9,7 @@ class UserStats():
         self.user_stats = User.stats
 
     def update_stats(self):
-        # Should be called whenever there is a change in the stats - New games atm
+        # Should be called whenever there is a change in the stats - New games/deleted games
         games = game_data.loadUser(self.user.id)['games']
         games_played = len(games)
         games_won = total_points = total_points_against = 0
