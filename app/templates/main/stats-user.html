@@ -18,7 +18,7 @@
                 </ul>
             </div>
             <div class="card-content">
-                <h1>{{ user.stats.win_ratio * 100 }}%</h3>
+                <h1>{{ round(user.stats.win_ratio * 100, 2) }}%</h3>
                 <span>Win ratio</span>
             </div>
             <div class="card-content">

@@ -30,7 +30,7 @@ def user(username):
     games = game_data.loadUser(user.id)
     current_app.logger.debug(f"Loaded user profile for {user.username}")
 
-    return render_template('main/user.html', str=str, user=user, reversed=reversed, title=user.username, games=games, game_data=game_data, User=User)
+    return render_template('main/user.html', round=round, str=str, user=user, reversed=reversed, title=user.username, games=games, game_data=game_data, User=User)
 
 
 @bp.route('/edit-profile', methods=['GET', 'POST'])
