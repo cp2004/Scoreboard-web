@@ -18,13 +18,13 @@ class UserStats():
             game = game_data.loadGame(game_id)
             if int(game['winner']) == self.user.id:
                 games_won += 1
+
             if int(game['player1']['id']) == self.user.id:
                 # If player is P1
                 total_points += game['player1']['score']
                 total_points_against += game['player2']['score']
                 users_played.append(int(game['player2']['id']))
-
-            if int(game['player2']['id']) == self.user.id:
+            elif int(game['player2']['id']) == self.user.id:
                 # If player is P2
                 total_points += game['player2']['score']
                 total_points_against += game['player1']['score']

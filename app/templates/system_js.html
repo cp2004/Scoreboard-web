@@ -1,0 +1,40 @@
+<script>
+    function shutdownSystem(btn) {
+        btn.innerHTML = '<i class="fas fa-sync fa-spin"></i> Shutdown';
+        var url = "/system/shutdown";
+        sendCmd(url, shutdownDone, btn);
+    }
+    function shutdownDone(xhttp, btn){
+        btn.innerHTML = '<i class="fas fa-power-off"></i> Shutdown';
+    }
+
+    function restartSystem(btn) {
+        btn.innerHTML = '<i class="fas fa-sync fa-spin"></i> Restart';
+        var url = "/system/restart";
+        sendCmd(url, restartDone, btn);
+    }
+    function restartDone(xhttp, btn){
+        btn.innerHTML = '<i class="fas fa-sync-alt"></i> Restart';
+    }
+
+    function restartServer(btn) {
+        btn.innerHTML = '<i class="fas fa-sync fa-spin"></i> Restart Server';
+        var url = "/server/restart";
+        sendCmd(url, restartServerDone, btn);
+    }
+    function restartServerDone(xhttp, btn){
+        btn.innerHTML = '<i class="fas fa-redo-alt"></i> Restart Server';
+    }
+
+    function sendCmd(url, cFunction, btn) {
+        var xhttp;
+        xhttp = new XMLHttpRequest();
+        xhttp.onreadystatechange = function() {
+            if (this.readyState == 4 && this.status == 204) {
+                cFunction(this, btn)
+            }
+        };
+        xhttp.open("POST", url, true)
+        xhttp.send();
+    }
+</script>

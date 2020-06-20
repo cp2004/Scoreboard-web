@@ -32,9 +32,21 @@
                 <li {% if request.path == url_for('admin.dash') %} class="nav-item active" {% else %} class="nav-item" {% endif %}>
                     <a class="nav-link" href="{{ url_for('admin.dash') }}"><i class="fas fa-tachometer-alt"></i> Dashboard</a>
                 </li>
+                <li class="nav-item dropdown">
+                    <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                        <i class="fas fa-power-off"></i>
+                    </a>
+                    <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
+                        <button class="dropdown-item" data-toggle="modal" data-target="#shutdownModal"><i class="fas fa-power-off"></i> Shutdown</button>
+                        <button class="dropdown-item" data-toggle="modal" data-target="#restartModal"><i class="fas fa-sync-alt"></i> Restart</button>
+                        <button class="dropdown-item" data-toggle="modal" data-target="#restartServerModal"><i class="fas fa-redo-alt"></i> Restart Server</button>
+                    </div>
+                </li>
             </ul>
             <a class="btn btn-danger" href="{{ url_for('auth.logout') }}">Logout</a>
             {% endif %}
         </div>
     </div>
-  </nav>
+</nav>
+{% include '_system_popups.html' %}
+{% include 'system_js.html' %}

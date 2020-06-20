@@ -1,0 +1,61 @@
+<!-- Modals for Shutdown, Restart, Restart Server -->
+<div class="modal fade" id="shutdownModal" tabindex="-1" role="dialog" aria-labelledby="shutdownModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="shutdownModalLabel">Are you sure?</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+                </div>
+                <div class="modal-body">
+                    Are you sure you want to shutdown the system? This will end any games currently in progress.
+                    It does not currently work!
+                </div>
+                <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                <button type="button" onclick="shutdownSystem(this)" class="btn btn-primary"><i class="fas fa-power-off"></i> Shutdown</button>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="modal fade" id="restartModal" tabindex="-1" role="dialog" aria-labelledby="restartModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="restartModalLabel">Are you sure?</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+                </div>
+                <div class="modal-body">
+                    Are you sure you want to restart the system? This will end any games currently in progress.
+                    It does not currently work!
+                </div>
+                <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                <button type="button"  onclick="restartSystem(this)" class="btn btn-primary"><i class="fas fa-sync-alt"></i> Restart</button>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="modal fade" id="restartServerModal" tabindex="-1" role="dialog" aria-labelledby="restartServerModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="restartServerModalLabel">Are you sure?</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+                </div>
+                <div class="modal-body">
+                    Are you sure you want to restart the server? This will end any games currently in progress.
+                    It does not currently work!
+                </div>
+                <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                <button type="button"  onclick="restartServer(this)" class="btn btn-primary"><i class="fas fa-redo-alt"></i> Restart</button>
+            </div>
+        </div>
+    </div>
+</div>
